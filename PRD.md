@@ -297,7 +297,7 @@ Browser speech: speechSynthesis (read aloud, ja-JP) · SpeechRecognition (voice 
 | `rules/{ingredient_country}` | `ingredient`, `country`, `verdict`, `quote`, `sourceUrl`, `authority`, `fetchedAt`, `contentHash` | Signed-in users read/write; no user field |
 
 **Repo data files**
-- `src/data/sources.json`: `[{country, authority, urls[], language, lastVerified}]` for JP, AE, SG, GR, GB, US.
+- `src/data/sources.json`: `[{country, name, language, lastVerified, urls: [{authority, url}]}]` for JP, AE, SG, GR, GB, US. Each URL carries its own authority because some countries need two official pages (see §16, 2026-11-15).
 - `src/data/synonyms.json`: ingredient → synonyms (salts, common names, Japanese names where needed).
 - `src/data/fallback-verdicts.json`: saved verdicts with quote, URL and `savedOn`, checked by hand against the official page.
 
@@ -371,7 +371,8 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 
 **Result:**
 - Step 0 PASSED (2026-11-14): Gemini Nano downloaded on the HP EliteBook x360 1030 G2 (performance class "Low", GPU path) and replied to a text prompt.
-- Steps 1–6: [pending] → `docs/gate0.md`.
+- Step 3 PASSED from the dev container (2026-11-15): all 8 listed pages fetched (Vercel run pending).
+- Steps 1, 2, 4, 5, 6: pending → `docs/gate0.md`.
 
 **Resolved decisions (do not re-litigate):**
 
@@ -392,6 +393,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Agents run phases continuously; they stop only when Adesope is needed, with a simple guide (CLAUDE.md §10) | Adesope's instruction |
 | 2026-11-15 | Repo = github.com/london160771/carrysafe. Agents commit AND push to GitHub at the end of every phase that passes verify | Adesope's instruction |
 | 2026-11-15 | Medicine photos: 3 real photos in `samples/real/` (bromhexine syrup EN + FR side, orphenadrine + paracetamol blister). Seed ingredients without photos get code-generated sample labels (no brands, marked SAMPLE) | Adesope's photos; web product photos avoided (copyright) |
+| 2026-11-15 | Official sources: JP = MHLW Narcotics Control Dept + UK FCDO Japan; AE = UAE Embassy (Washington) + UK FCDO UAE; SG = HSA; GR = UK FCDO Greece (no fetchable Greek government page with traveller rules); GB = GOV.UK; US = FDA (CBP blocks automated fetches, 403). `sources.json` URLs now carry their own authority | Fetch results in `docs/gate0.md` |
 
 ---
 

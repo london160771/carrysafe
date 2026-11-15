@@ -1,0 +1,58 @@
+[
+  {
+    "country": "JP",
+    "name": "Japan",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "Ministry of Health, Labour and Welfare, Narcotics Control Department", "url": "https://www.ncd.mhlw.go.jp/en/application2.html" },
+      { "authority": "UK Foreign, Commonwealth & Development Office (travel advice: Japan)", "url": "https://www.gov.uk/foreign-travel-advice/japan/health" }
+    ]
+  },
+  {
+    "country": "AE",
+    "name": "United Arab Emirates",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "Embassy of the United Arab Emirates, Washington DC", "url": "https://www.uae-embassy.org/permitted-prescriptionsdrugs-while-entering-uae" },
+      { "authority": "UK Foreign, Commonwealth & Development Office (travel advice: UAE)", "url": "https://www.gov.uk/foreign-travel-advice/united-arab-emirates/health" }
+    ]
+  },
+  {
+    "country": "SG",
+    "name": "Singapore",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "Health Sciences Authority", "url": "https://www.hsa.gov.sg/travelling-with-medication-and-medical-devices/personal-medications/" }
+    ]
+  },
+  {
+    "country": "GR",
+    "name": "Greece",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "UK Foreign, Commonwealth & Development Office (travel advice: Greece)", "url": "https://www.gov.uk/foreign-travel-advice/greece/health" }
+    ]
+  },
+  {
+    "country": "GB",
+    "name": "United Kingdom",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "GOV.UK (Home Office)", "url": "https://www.gov.uk/travelling-controlled-drugs" }
+    ]
+  },
+  {
+    "country": "US",
+    "name": "United States",
+    "language": "en",
+    "lastVerified": "2026-11-15",
+    "urls": [
+      { "authority": "U.S. Food and Drug Administration", "url": "https://www.fda.gov/industry/import-basics/personal-importation" }
+    ]
+  }
+]

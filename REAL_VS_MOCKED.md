@@ -2,12 +2,12 @@
 
 Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: cloud"**. These badges come from the SDK, not hard-coded labels. Every verdict shows the official quote, its link and its date.
 
-> Status: **planned**. Nothing is built yet. Update this file as each phase ships.
+> Status (2026-11-15): Phase 0 built. `/api/source` real fetch works for all 8 listed pages from the dev container (`docs/gate0.md`). Other rows are planned. Update this file as each phase ships.
 
 | Part | Real or mocked | Proof |
 |---|---|---|
 | On-device label reading + Framing Coach (Gemini Nano) | Real | [badge screenshot / video timestamp] |
-| Official page fetch (`/api/source`, 6 countries) | Real | [authority + link + fetch date in UI] |
+| Official page fetch (`/api/source`, 6 countries) | Real | `api/source.test.js`; fetch log in `docs/gate0.md` |
 | Cloud verdict + word-for-word quote check | Real | [test names + "Quote found on official page ✓"] |
 | Request guard + lab | Real | [test names + lab run] |
 | Group trip status (Firestore) | Real | [rules tests] |

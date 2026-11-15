@@ -97,6 +97,9 @@ Check installed versions first.
   - `SpeechRecognition` may send audio to Google, so label it.
   - `speechSynthesis` voices load async (`voiceschanged`); check for `ja-JP`.
 - **Demo laptop Nano:** performance class "Low". Show progress; never block the UI.
+- **Installed (Phase 0):** Vite 8, React 19.3, firebase 13.3, Vitest 5, ESLint 10 (flat config). JSON imports use `with { type: 'json' }`.
+- **AI Logic inference source:** `result.response.inferenceSource` (`"on_device"` / `"in_cloud"`). On-device images need `onDeviceParams.createOptions.expectedInputs: [{type:'image'}]`.
+- **Official pages that block bots:** cbp.gov (403), mohap.gov.ae (reset), Japanese embassy sites (403). See `docs/gate0.md`.
 - [Add breaking changes here as you find them.]
 
 ## 9. Code quality

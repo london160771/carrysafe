@@ -3,22 +3,22 @@
 > Where the project actually stands. A progress log, not requirements (those live in `PRD.md`).
 > Update at the end of every phase. Only write what was verified. If this file and the repo disagree, the repo wins.
 
-**Last updated:** 2026-11-15 15:00 WAT · **By:** Claude (chat) · **Commit:** none yet
+**Last updated:** 2026-11-15 16:35 WAT · **By:** Claude Code · **Commit:** see git log (`feat: phase 0 foundation`)
 
 ---
 
 ## 1. Right now
 
-- **Active phase:** Phase 0: Foundation + Gate 0 (PRD §27), not started
-- **Status:** Docs updated to v1.1 (no-billing plan); no code yet
-- **Next step:** Scaffold the repo; research `sources.json` for JP, AE, SG, GR, GB, US; run Gate 0
-- **Blocked by:** nothing for scaffolding. Later: App Check key or debug token (PRD §33 #2); medicine box photos on hold (PRD §33 #3)
+- **Active phase:** Phase 0 code done; Gate 0 steps 1, 2, 5, 6 wait on Adesope. Phase 1 starts in parallel (local code only).
+- **Status:** Scaffold, Firebase init, `/api/source` (real HTML fetch, allow-list, timeout, size cap), `sources.json` (6 countries, 8 pages), Gate 0 harness (`/gate0.html`), generated sample labels. `npm run verify` passes.
+- **Next step:** Adesope: Firebase web config in `.env.local` + Vercel, App Check debug token, Vercel team access, run `/gate0.html` on the demo laptop. Decision on Japan pseudoephedrine category (see `docs/gate0.md`).
+- **Blocked by:** Firebase web config + debug token (Gate 0 step 5); Vercel access (deploy); demo laptop (steps 1, 2, 6).
 
 ## 2. Phase tracker
 
 | Phase (PRD §27) | Status | Verified on | Commit | Review checkpoint |
 |---|---|---|---|---|
-| 0: Foundation + Gate 0 | Not started (Gate 0 step 0 passed) | 2026-11-14 | — | — |
+| 0: Foundation + Gate 0 | Code done; Gate 0 steps 0 + 3 PASS, 1/2/4/5/6 pending | 2026-11-15 | `feat: phase 0 foundation` | — |
 | 1: Private scan + request guard | Not started | | | A |
 | 2: Official-source route check | Not started | | | B |
 | 3: Proof + group | Not started | | | — |
@@ -30,9 +30,9 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | not run (no code) | — |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 8 files / 29 tests, build OK | 2026-11-15 |
 | Rules tests | `npm run test:rules` | — | — |
-| UI at 390px | screenshot | — | — |
+| UI at 390px | Playwright screenshot of `/` and `/gate0.html` | no horizontal scroll (scrollWidth 390) | 2026-11-15 |
 | Seed "Amaka-Tokyo" | manual | — | — |
 
 ## 4. What works (verified)
@@ -42,7 +42,8 @@
 
 ## 5. Real vs mocked right now
 
-Nothing built. See `REAL_VS_MOCKED.md`.
+- `/api/source`: real fetch of the 8 listed official pages (verified from the dev container, not yet from Vercel).
+- Generated sample labels in `samples/generated/` (marked SAMPLE LABEL). See `REAL_VS_MOCKED.md`.
 
 ## 6. Live proof
 
@@ -68,6 +69,10 @@ Nothing built. See `REAL_VS_MOCKED.md`.
 
 - Billing sign-up blocked by Google's fraud check (Nov 15) → no Search grounding; official-page fetch instead (PRD §16).
 - Demo laptop is performance class "Low"; on-device responses may be slow.
+- Japan pseudoephedrine: MHLW lists it as a "Stimulants' Raw Material" (permission in advance); UK FCDO says carrying it is illegal. PRD story assumes ⛔. Decision pending.
+- Greece has no fetchable Greek government page with traveller rules; UK FCDO Greece is used.
+- Paracetamol is not named on the JP pages, so a JP ✅ can't be quote-verified yet (INV-3 → ⚠).
+- Cloud model name `gemini-2.5-flash` is provisional until Gate 0 step 5.
 
 ## 9. Handoff notes
 
@@ -76,6 +81,8 @@ Nothing built. See `REAL_VS_MOCKED.md`.
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-15** — Phase 0 code: Vite 8 + React 19 + Bootstrap 5.3 scaffold, Vitest, ESLint; Firebase init (Auth anon, Firestore, App Check debug/reCAPTCHA Enterprise, AI Logic); `/api/source`; `sources.json`; Gate 0 harness; sample labels. Verify passes (29 tests).
 
 - **2026-11-15** — Repo created; docs pushed; commit+push per passing phase approved; photos on hold.
 - **2026-11-15** — PRD v1.1: no-billing plan (official-page fetch + quote verification + saved table), Vercel hosting, 6 countries, continuous phase mode; all docs updated.

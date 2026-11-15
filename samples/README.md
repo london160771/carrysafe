@@ -11,10 +11,17 @@ Cropped to the label; metadata stripped. Use them for Gate 0 steps 1–2 (PRD §
 
 Ingredients covered: bromhexine, orphenadrine, paracetamol.
 
-## Sample labels for the seed trip (to be made in Phase 0/1)
+## Sample labels for the seed trip (made 2026-11-15)
 The seed "Amaka-Tokyo" (PRD §19) also needs **pseudoephedrine** and **methylphenidate**. We don't use product photos from the web (copyright). Instead we generate our own plain sample labels in `samples/generated/` with code:
 - generic names only, no real brand names or logos;
 - a visible "SAMPLE LABEL · made by Carry Safe for demo" line;
 - labelled "Sample photo" in the UI (PRD §17).
+
+Made by `python3 scripts/generate_sample_labels.py` (Pillow, DejaVu fonts):
+
+| File | Ground truth |
+|---|---|
+| `generated/pseudoephedrine-sample.png` | Pseudoephedrine hydrochloride 60 mg tablets · 24 tablets · SAMPLE LABEL |
+| `generated/methylphenidate-sample.png` | Methylphenidate hydrochloride 10 mg tablets · 30 tablets · SAMPLE LABEL |
 
 If Adesope later sends real photos of these, add them to `real/` and update this table.
