@@ -100,6 +100,7 @@ Check installed versions first.
 - **Installed (Phase 0):** Vite 8, React 19.3, firebase 13.3, Vitest 5, ESLint 10 (flat config). JSON imports use `with { type: 'json' }`.
 - **AI Logic inference source:** `result.response.inferenceSource` (`"on_device"` / `"in_cloud"`). On-device images need `onDeviceParams.createOptions.expectedInputs: [{type:'image'}]`.
 - **Official pages that block bots:** cbp.gov (403), mohap.gov.ae (reset), Japanese embassy sites (403). See `docs/gate0.md`.
+- **Vitest 5:** a function returned from `beforeEach` runs as teardown. Write `beforeEach(() => { mock.mockReset(); })` with braces, or the mock gets called after the test.
 - [Add breaking changes here as you find them.]
 
 ## 9. Code quality

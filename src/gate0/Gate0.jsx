@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { extractLabel, framingCoach, hasOnDeviceModel } from '../ai/onDevice.js';
 import { checkSources, checkSpeech, timed } from './checks.js';
 import { cloudJsonPing } from './cloudPing.js';
-import { loadSample, SAMPLES } from './samples.js';
+import { loadSample, SAMPLES } from '../scan/samples.js';
 
 async function runDeviceSteps() {
   const availability = await hasOnDeviceModel();

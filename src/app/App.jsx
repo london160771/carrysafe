@@ -1,34 +1,55 @@
+import AddMedicine from '../meds/AddMedicine.jsx';
 import Disclaimer from './Disclaimer.jsx';
-import { describeSetup } from './setupStatus.js';
+import SetupStatus from './SetupStatus.jsx';
+import { useHashRoute } from './useHashRoute.js';
 
 const FLOW = ['SCAN', 'HIDE', 'CHECK EVERY STOP', 'SHARE STATUS', 'SHOW THE OFFICER'];
-const SETUP = describeSetup(import.meta.env, 'LanguageModel' in globalThis);
+const SCREENS = [
+  { id: 'trip', label: 'Trip' },
+  { id: 'add', label: 'Add medicine' },
+];
 
 export default function App() {
+  const route = useHashRoute();
+  const screen = SCREENS.some((item) => item.id === route) ? route : 'trip';
+
   return (
     <>
+      <a
+        className="visually-hidden-focusable"
+        href="#main"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById('main').focus();
+        }}
+      >
+        Skip to content
+      </a>
       <header className="bg-white border-bottom">
         <div className="container py-3">
           <h1 className="h3 mb-1">Carry Safe</h1>
-          <p className="mb-0">Your medicine. Your secret. Your trip, safe.</p>
-        </div>
-      </header>
-      <main className="container py-4" id="main">
-        <p className="cs-flow fw-semibold" aria-label={FLOW.join(', then ')}>
-          {FLOW.join(' → ')}
-        </p>
-        <section className="card mb-4" aria-labelledby="setup-heading">
-          <div className="card-body">
-            <h2 className="h5" id="setup-heading">Setup status</h2>
-            <ul className="list-unstyled mb-0">
-              {SETUP.map((item) => (
-                <li key={item.label}>
-                  <span aria-hidden="true">{item.ok ? '✅' : '⚠'}</span> {item.ok ? 'Ready:' : 'Not ready:'} {item.label}
+          <p className="mb-2">Your medicine. Your secret. Your trip, safe.</p>
+          <nav aria-label="Screens">
+            <ul className="nav nav-pills">
+              {SCREENS.map((item) => (
+                <li className="nav-item" key={item.id}>
+                  <a className={`nav-link ${screen === item.id ? 'active' : ''}`} aria-current={screen === item.id ? 'page' : undefined} href={`#/${item.id}`}>
+                    {item.label}
+                  </a>
                 </li>
               ))}
             </ul>
-          </div>
-        </section>
+          </nav>
+        </div>
+      </header>
+      <main className="container py-4" id="main" tabIndex={-1}>
+        {screen === 'trip' && (
+          <>
+            <p className="cs-flow fw-semibold" aria-label={FLOW.join(', then ')}>{FLOW.join(' → ')}</p>
+            <SetupStatus />
+          </>
+        )}
+        {screen === 'add' && <AddMedicine />}
       </main>
       <footer className="container pb-4">
         <Disclaimer />

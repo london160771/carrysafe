@@ -9,7 +9,7 @@
 
 ## 1. Right now
 
-- **Active phase:** Phase 0 code done; Gate 0 steps 1, 2, 5, 6 wait on Adesope. Phase 1 starts in parallel (local code only).
+- **Active phase:** Phase 1 code done (Checkpoint A self-review done). Gate 0 steps 1, 2, 5, 6 still wait on Adesope.
 - **Status:** Scaffold, Firebase init, `/api/source` (real HTML fetch, allow-list, timeout, size cap), `sources.json` (6 countries, 8 pages), Gate 0 harness (`/gate0.html`), generated sample labels. `npm run verify` passes.
 - **Next step:** Adesope: Firebase web config in `.env.local` + Vercel, App Check debug token, Vercel team access, run `/gate0.html` on the demo laptop. Decision on Japan pseudoephedrine category (see `docs/gate0.md`).
 - **Blocked by:** Firebase web config + debug token (Gate 0 step 5); Vercel access (deploy); demo laptop (steps 1, 2, 6).
@@ -19,7 +19,7 @@
 | Phase (PRD §27) | Status | Verified on | Commit | Review checkpoint |
 |---|---|---|---|---|
 | 0: Foundation + Gate 0 | Code done; Gate 0 steps 0 + 3 PASS, 1/2/4/5/6 pending | 2026-11-15 | `feat: phase 0 foundation` | — |
-| 1: Private scan + request guard | Not started | | | A |
+| 1: Private scan + request guard | Code done; on-device run pending on demo laptop | 2026-11-15 | `feat: phase 1 private scan + request guard` | A: done (2 fixes) |
 | 2: Official-source route check | Not started | | | B |
 | 3: Proof + group | Not started | | | — |
 | 4: Border Card + accessibility | Not started | | | — |
@@ -30,7 +30,7 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 8 files / 29 tests, build OK | 2026-11-15 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 14 files / 81 tests, build OK | 2026-11-15 |
 | Rules tests | `npm run test:rules` | — | — |
 | UI at 390px | Playwright screenshot of `/` and `/gate0.html` | no horizontal scroll (scrollWidth 390) | 2026-11-15 |
 | Seed "Amaka-Tokyo" | manual | — | — |
@@ -81,6 +81,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-15** — Phase 1 code: request guard, cloud sender + outgoing log, on-device Framing Coach + extraction, brand suggestion, confirm step, IndexedDB store, Add-medicine screen. Report: `docs/phase-reports/phase-1.md`.
 
 - **2026-11-15** — Phase 0 code: Vite 8 + React 19 + Bootstrap 5.3 scaffold, Vitest, ESLint; Firebase init (Auth anon, Firestore, App Check debug/reCAPTCHA Enterprise, AI Logic); `/api/source`; `sources.json`; Gate 0 harness; sample labels. Verify passes (29 tests).
 

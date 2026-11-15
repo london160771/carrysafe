@@ -9,11 +9,13 @@ function getAppAI() {
   return getAI(getFirebaseApp(), { backend: new GoogleAIBackend() });
 }
 
+export const ON_DEVICE_IMAGE_PARAMS = Object.freeze({
+  mode: InferenceMode.ONLY_ON_DEVICE,
+  onDeviceParams: { createOptions: IMAGE_INPUT },
+});
+
 export function onDeviceImageModel() {
-  return getGenerativeModel(getAppAI(), {
-    mode: InferenceMode.ONLY_ON_DEVICE,
-    onDeviceParams: { createOptions: IMAGE_INPUT },
-  });
+  return getGenerativeModel(getAppAI(), ON_DEVICE_IMAGE_PARAMS);
 }
 
 export function cloudModel(generationConfig) {

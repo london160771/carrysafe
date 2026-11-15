@@ -36,6 +36,9 @@ export async function fetchOfficialPage(url, { fetchImpl = fetch, now = () => ne
   } catch (error) {
     throw new AppError('source_unavailable', error.name === 'TimeoutError' ? 'timeout' : 'network_error');
   }
+  if (response.url && new URL(response.url).origin !== new URL(url).origin) {
+    throw new AppError('source_not_allowed', `redirected_off_origin:${new URL(response.url).origin}`);
+  }
   if (!response.ok) throw new AppError('source_unavailable', `http_${response.status}`);
   const declaredLength = Number(response.headers.get('content-length') ?? 0);
   if (declaredLength > MAX_RESPONSE_BYTES) throw new AppError('source_unavailable', 'response_too_large');

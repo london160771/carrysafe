@@ -72,6 +72,13 @@ describe('/api/source (FR-SRC-002, INV-7)', () => {
     expect(result.pages[0].error.detail).toBe('http_404');
   });
 
+  it('rejects a redirect to another origin', async () => {
+    const redirected = htmlResponse('<p>x</p>');
+    Object.defineProperty(redirected, 'url', { value: 'https://evil.example/page' });
+    const result = await fetchCountrySources('GB', { fetchImpl: vi.fn(async () => redirected) });
+    expect(result.pages[0].error).toMatchObject({ code: 'source_not_allowed' });
+  });
+
   it('rejects oversized pages', async () => {
     const fetchImpl = vi.fn(async () => htmlResponse('x'.repeat(MAX_RESPONSE_BYTES + 1)));
     const result = await fetchCountrySources('GR', { fetchImpl });
