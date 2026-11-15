@@ -211,7 +211,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 
   Anything else throws.
 - **INV-2 (no images out):** Image data only goes to `ONLY_ON_DEVICE` calls. Image data in a cloud request throws `image_not_allowed`.
-- **INV-3 (verified quotes):** ✅/⛔ require a quote found in the fetched page text after normalisation (whitespace, case, Unicode NFKC). Otherwise ⚠ `quote_not_found`.
+- **INV-3 (verified quotes):** ✅/⛔ (and "needs documents") require a quote of at least 20 characters found in the fetched page text after normalisation (whitespace, case, Unicode NFKC, curly quotes and dashes folded to ASCII). Otherwise ⚠ `quote_not_found`. Cached verdicts are re-verified against the current page before they are shown.
 - **INV-4 (status only):** Firestore never stores medicine names tied to a person, photos or conditions. The rule cache has no user field.
 - **INV-5 (code does maths):** Quantities and day counts are computed in code.
 - **INV-6 (confirm first):** No cloud call on device-extracted ingredients until the user confirms.
@@ -394,6 +394,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Repo = github.com/london160771/carrysafe. Agents commit AND push to GitHub at the end of every phase that passes verify | Adesope's instruction |
 | 2026-11-15 | Medicine photos: 3 real photos in `samples/real/` (bromhexine syrup EN + FR side, orphenadrine + paracetamol blister). Seed ingredients without photos get code-generated sample labels (no brands, marked SAMPLE) | Adesope's photos; web product photos avoided (copyright) |
 | 2026-11-15 | Official sources: JP = MHLW Narcotics Control Dept + UK FCDO Japan; AE = UAE Embassy (Washington) + UK FCDO UAE; SG = HSA; GR = UK FCDO Greece (no fetchable Greek government page with traveller rules); GB = GOV.UK; US = FDA (CBP blocks automated fetches, 403). `sources.json` URLs now carry their own authority | Fetch results in `docs/gate0.md` |
+| 2026-11-15 | INV-3 hardened: quotes ≥ 20 chars; curly quotes/dashes folded (models often straighten them); "needs documents" also needs a verified quote; cached verdicts re-verified | Phase 2 build; FCDO pages use curly apostrophes |
 
 ---
 

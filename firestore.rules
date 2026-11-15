@@ -1,0 +1,21 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isRuleEntry(data) {
+      return data.keys().hasOnly(['ingredient', 'country', 'verdict', 'quote', 'conditions', 'sourceUrl', 'authority', 'fetchedAt', 'contentHash', 'updatedAt'])
+        && data.verdict in ['allowed', 'needs_documents', 'prohibited']
+        && data.country is string && data.country.size() == 2
+        && data.quote is string && data.quote.size() <= 2000;
+    }
+
+    match /rules/{ruleId} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && isRuleEntry(request.resource.data);
+      allow delete: if false;
+    }
+  }
+}

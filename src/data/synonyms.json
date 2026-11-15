@@ -1,0 +1,26 @@
+{
+  "pseudoephedrine": {
+    "names": ["pseudoephedrine", "pseudoephedrine hydrochloride", "pseudoephedrine sulfate", "pseudoephedrine sulphate", "プソイドエフェドリン"],
+    "classTerms": ["stimulants' raw material", "stimulants raw material", "anti-stimulant"]
+  },
+  "methylphenidate": {
+    "names": ["methylphenidate", "methylphenidate hydrochloride", "dexmethylphenidate", "メチルフェニデート"],
+    "classTerms": ["psychotropic", "controlled medication", "controlled drug"]
+  },
+  "paracetamol": {
+    "names": ["paracetamol", "acetaminophen", "アセトアミノフェン"],
+    "classTerms": ["over-the-counter medication"]
+  },
+  "codeine": {
+    "names": ["codeine", "codeine phosphate", "コデイン"],
+    "classTerms": ["narcotic", "controlled drug"]
+  },
+  "bromhexine": {
+    "names": ["bromhexine", "bromhexine hydrochloride", "chlorhydrate de bromhexine"],
+    "classTerms": ["over-the-counter medication"]
+  },
+  "orphenadrine": {
+    "names": ["orphenadrine", "orphenadrine citrate"],
+    "classTerms": []
+  }
+}

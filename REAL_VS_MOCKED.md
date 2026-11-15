@@ -8,7 +8,7 @@ Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: clou
 |---|---|---|
 | On-device label reading + Framing Coach (Gemini Nano) | Real | [badge screenshot / video timestamp] |
 | Official page fetch (`/api/source`, 6 countries) | Real | `api/source.test.js`; fetch log in `docs/gate0.md` |
-| Cloud verdict + word-for-word quote check | Real | [test names + "Quote found on official page ✓"] |
+| Cloud verdict + word-for-word quote check | Real code; live run pending Firebase config | `src/core/verifyQuote.test.js`, `src/check/checkStop.test.js` |
 | Request guard + lab | Real | `src/privacy/buildCloudRequest.test.js` (guard); lab in Phase 3 |
 | Group trip status (Firestore) | Real | [rules tests] |
 | Saved backup verdicts | Real quotes saved earlier, used only if a fetch fails | "Saved copy from [date]" label |

@@ -3,15 +3,13 @@ import ScanPanel from '../scan/ScanPanel.jsx';
 import TypePanel from '../scan/TypePanel.jsx';
 import ConfirmPanel from './ConfirmPanel.jsx';
 import MedList from './MedList.jsx';
-import { useMedStore } from './useMedStore.js';
 
 const MODES = [
   { id: 'scan', label: 'Scan' },
   { id: 'type', label: 'Type' },
 ];
 
-export default function AddMedicine() {
-  const { meds, saveMed, removeMed } = useMedStore();
+export default function AddMedicine({ meds, saveMed, removeMed }) {
   const [mode, setMode] = useState('scan');
   const [pending, setPending] = useState(null);
 

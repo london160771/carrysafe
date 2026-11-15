@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { createIdbKv } from '../store/idbKv.js';
+import { appKv } from '../store/kv.js';
 import { createMedStore } from '../store/medStore.js';
 
 export function useMedStore() {
-  const store = useMemo(() => createMedStore(createIdbKv()), []);
+  const store = useMemo(() => createMedStore(appKv), []);
   const [meds, setMeds] = useState([]);
 
   useEffect(() => {

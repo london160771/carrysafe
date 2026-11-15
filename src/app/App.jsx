@@ -1,4 +1,8 @@
 import AddMedicine from '../meds/AddMedicine.jsx';
+import { useMedStore } from '../meds/useMedStore.js';
+import ResultsScreen from '../results/ResultsScreen.jsx';
+import RouteBuilder from '../trip/RouteBuilder.jsx';
+import { useTrip } from '../trip/useTrip.js';
 import Disclaimer from './Disclaimer.jsx';
 import SetupStatus from './SetupStatus.jsx';
 import { useHashRoute } from './useHashRoute.js';
@@ -7,11 +11,14 @@ const FLOW = ['SCAN', 'HIDE', 'CHECK EVERY STOP', 'SHARE STATUS', 'SHOW THE OFFI
 const SCREENS = [
   { id: 'trip', label: 'Trip' },
   { id: 'add', label: 'Add medicine' },
+  { id: 'results', label: 'Results' },
 ];
 
 export default function App() {
-  const route = useHashRoute();
-  const screen = SCREENS.some((item) => item.id === route) ? route : 'trip';
+  const hashRoute = useHashRoute();
+  const screen = SCREENS.some((item) => item.id === hashRoute) ? hashRoute : 'trip';
+  const medStore = useMedStore();
+  const trip = useTrip();
 
   return (
     <>
@@ -46,10 +53,12 @@ export default function App() {
         {screen === 'trip' && (
           <>
             <p className="cs-flow fw-semibold" aria-label={FLOW.join(', then ')}>{FLOW.join(' → ')}</p>
+            <RouteBuilder route={trip.route} onChange={trip.setRoute} />
             <SetupStatus />
           </>
         )}
-        {screen === 'add' && <AddMedicine />}
+        {screen === 'add' && <AddMedicine {...medStore} />}
+        {screen === 'results' && <ResultsScreen route={trip.route} meds={medStore.meds} results={trip.results} progress={trip.progress} onRun={trip.runChecks} />}
       </main>
       <footer className="container pb-4">
         <Disclaimer />
