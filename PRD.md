@@ -395,6 +395,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Medicine photos: 3 real photos in `samples/real/` (bromhexine syrup EN + FR side, orphenadrine + paracetamol blister). Seed ingredients without photos get code-generated sample labels (no brands, marked SAMPLE) | Adesope's photos; web product photos avoided (copyright) |
 | 2026-11-15 | Official sources: JP = MHLW Narcotics Control Dept + UK FCDO Japan; AE = UAE Embassy (Washington) + UK FCDO UAE; SG = HSA; GR = UK FCDO Greece (no fetchable Greek government page with traveller rules); GB = GOV.UK; US = FDA (CBP blocks automated fetches, 403). `sources.json` URLs now carry their own authority | Fetch results in `docs/gate0.md` |
 | 2026-11-15 | INV-3 hardened: quotes ≥ 20 chars; curly quotes/dashes folded (models often straighten them); "needs documents" also needs a verified quote; cached verdicts re-verified | Phase 2 build; FCDO pages use curly apostrophes |
+| 2026-11-15 | Japan + pseudoephedrine: let the verified quote decide; keep both official pages (MHLW NCD + UK FCDO). The demo may show ⚠ needs documents instead of ⛔ | Adesope's choice on the decision card |
 
 ---
 
@@ -433,7 +434,7 @@ Real requests through the real code, each blocked live:
 - Route: Lagos (NG, home) → Dubai (AE, layover) → Tokyo (JP, destination).
 - Travellers: "Amaka" and "Mum".
 - Medicines: methylphenidate (Amaka); pseudoephedrine cold tablets and paracetamol (Mum).
-- Expected: JP ⛔ pseudoephedrine; AE ⚠ methylphenidate (documents); paracetamol ✅ in JP and AE. **[Confirm each against the official pages at Gate 0; fix this section with evidence if different.]**
+- Expected (updated 2026-11-15 with page evidence, `docs/gate0.md`): JP pseudoephedrine ⛔ or ⚠ needs documents, whichever official quote the model returns (MHLW: permission needed; UK FCDO: illegal to carry), both pages kept; AE methylphenidate ⚠ (documents, via the "controlled medication" rule); paracetamol ⚠ "not mentioned" in JP (no JP page names it), AE depends on the model reading the over-the-counter rule. **[Confirm with live runs at Gate 0 step 4.]**
 
 | Measure | Target |
 |---|---|

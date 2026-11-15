@@ -46,7 +46,7 @@ Exact lines from the fetched text (2026-11-15):
 **Japan, pseudoephedrine.** The two official pages disagree on the category:
 - MHLW Narcotics Control Department: "If your medicine is in “Narcotics” and/or “Stimulants' Raw Materials”, you need to get a permission before you enter/leave Japan." and "・Srimulants Raw Materisls:Lisdexamfetamine(Vyvanse, Elvanse...), Pseudoephedrine..." (typos are on the official page). That reads as **needs_documents** (permission in advance).
 - UK FCDO Japan: "It is illegal to carry some common prescription and over-the-counter medicines under Japan’s strictly enforced law on anti-stimulant drugs. This includes:" … "cold and flu medication containing pseudoephedrine". That reads as **prohibited**.
-- PRD §2/§19 assume **prohibited**. Third-party sources mention a 10% pseudoephedrine threshold for OTC products; not found on a fetchable official page yet.
+- PRD §2/§19 assumed **prohibited**. **Decision (Adesope, 2026-11-15): let the verified quote decide; keep both pages.** Third-party sources mention a 10% pseudoephedrine threshold for OTC products; not found on a fetchable official page yet.
 
 **Japan, methylphenidate.** MHLW NCD lists it under "Psycotropics (no permission required)". Not in the seed for JP, noted for completeness.
 
