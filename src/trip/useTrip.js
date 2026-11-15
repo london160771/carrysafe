@@ -29,9 +29,9 @@ export function useTrip() {
     store.setRoute(next);
   }, [store]);
 
-  const runChecks = useCallback(async (meds) => {
+  const runChecks = useCallback(async (meds, routeOverride = route) => {
     const deps = { fetchSources, cloudVerdict, cache: createRuleCache() };
-    const next = await runRouteCheck(route, meds, deps, setProgress);
+    const next = await runRouteCheck(routeOverride, meds, deps, setProgress);
     setResults(next);
     await store.setResults(next);
     setProgress(null);

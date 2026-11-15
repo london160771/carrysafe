@@ -23,14 +23,14 @@
 | 2: Official-source route check | Code done; live verdicts pending Firebase config | 2026-11-15 | `feat: phase 2 official-source route check` | B: done (2 gaps logged) |
 | 3: Proof + group | Done (emulator); rules deploy pending | 2026-11-15 | `feat: phase 3 proof panel, lab, group trip` | — |
 | 4: Border Card + accessibility | Code done; real translation/voice/screen reader pending | 2026-11-15 | `feat: phase 4 border card, officer mode, voice, a11y` | — |
-| 5: P1 extras | Not started | | | — |
-| 6: Judge Mode, README, video, submit | Not started | | | C |
+| 5: P1 extras | Held: P0 must be deployed + recorded first (PRD §26) | | | — |
+| 6: Judge Mode, README, video, submit | `/judge` + README + LICENSE done; deploy/video/submit pending | 2026-11-15 | `feat: judge mode, README, license` | C: pending |
 
 ## 3. Last verification
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 30 files / 133 tests, build OK | 2026-11-15 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 31 files / 135 tests, build OK | 2026-11-15 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
 | UI at 390px | Playwright screenshot of `/` and `/gate0.html` | no horizontal scroll (scrollWidth 390) | 2026-11-15 |
 | Seed "Amaka-Tokyo" | manual | — | — |
@@ -81,6 +81,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-15** — Phase 6 (partial): /judge seeded demo, README setup + limits, LICENSE. Report: `docs/phase-reports/phase-6-partial.md`.
 
 - **2026-11-15** — Phase 4: translateCard, Border Card, Show the Officer, voice add, settings bar. Report: `docs/phase-reports/phase-4.md`.
 

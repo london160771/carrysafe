@@ -2,6 +2,7 @@ import BorderCardScreen from '../card/BorderCardScreen.jsx';
 import AddMedicine from '../meds/AddMedicine.jsx';
 import SettingsBar from '../settings/SettingsBar.jsx';
 import { useMedStore } from '../meds/useMedStore.js';
+import JudgeScreen from '../judge/JudgeScreen.jsx';
 import PanelScreen from '../panel/PanelScreen.jsx';
 import ResultsScreen from '../results/ResultsScreen.jsx';
 import GroupPanel from '../trip/GroupPanel.jsx';
@@ -18,6 +19,7 @@ const SCREENS = [
   { id: 'results', label: 'Results' },
   { id: 'panel', label: 'What left your laptop' },
   { id: 'card', label: 'Border Card' },
+  { id: 'judge', label: 'Judge Mode' },
 ];
 
 export default function App() {
@@ -71,6 +73,7 @@ export default function App() {
         {screen === 'results' && <ResultsScreen route={trip.route} meds={medStore.meds} results={trip.results} progress={trip.progress} onRun={trip.runChecks} />}
         {screen === 'panel' && <PanelScreen />}
         {screen === 'card' && <BorderCardScreen meds={medStore.meds} />}
+        {screen === 'judge' && <JudgeScreen medStore={medStore} trip={trip} />}
       </main>
       <footer className="container pb-4">
         <Disclaimer />

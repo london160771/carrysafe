@@ -20,6 +20,7 @@ export default function ResultsScreen({ route, meds, results, progress, onRun })
 
   return (
     <section aria-labelledby="results-heading">
+      {confirmedMeds.some((med) => med.demo) && <p className="badge text-bg-warning fs-6">DEMO TRIP · sample data, real checks</p>}
       <h2 className="h4" id="results-heading">Check every stop</h2>
       <p>
         Only each ingredient name and the country code leave this device. Stops: {stops.map((stop) => `${countryName(stop.country)} (${stop.role})`).join(' → ') || 'add a destination'}.
