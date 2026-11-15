@@ -1,6 +1,8 @@
 import AddMedicine from '../meds/AddMedicine.jsx';
 import { useMedStore } from '../meds/useMedStore.js';
+import PanelScreen from '../panel/PanelScreen.jsx';
 import ResultsScreen from '../results/ResultsScreen.jsx';
+import GroupPanel from '../trip/GroupPanel.jsx';
 import RouteBuilder from '../trip/RouteBuilder.jsx';
 import { useTrip } from '../trip/useTrip.js';
 import Disclaimer from './Disclaimer.jsx';
@@ -12,11 +14,14 @@ const SCREENS = [
   { id: 'trip', label: 'Trip' },
   { id: 'add', label: 'Add medicine' },
   { id: 'results', label: 'Results' },
+  { id: 'panel', label: 'What left your laptop' },
 ];
 
 export default function App() {
   const hashRoute = useHashRoute();
-  const screen = SCREENS.some((item) => item.id === hashRoute) ? hashRoute : 'trip';
+  const [routeName, routeParam] = hashRoute.split('/');
+  const screen = SCREENS.some((item) => item.id === routeName) ? routeName : 'trip';
+  const joinTripId = routeName === 'join' ? routeParam : null;
   const medStore = useMedStore();
   const trip = useTrip();
 
@@ -54,11 +59,13 @@ export default function App() {
           <>
             <p className="cs-flow fw-semibold" aria-label={FLOW.join(', then ')}>{FLOW.join(' → ')}</p>
             <RouteBuilder route={trip.route} onChange={trip.setRoute} />
+            <GroupPanel route={trip.route} results={trip.results} joinTripId={joinTripId} onRouteFromGroup={trip.setRoute} />
             <SetupStatus />
           </>
         )}
         {screen === 'add' && <AddMedicine {...medStore} />}
         {screen === 'results' && <ResultsScreen route={trip.route} meds={medStore.meds} results={trip.results} progress={trip.progress} onRun={trip.runChecks} />}
+        {screen === 'panel' && <PanelScreen />}
       </main>
       <footer className="container pb-4">
         <Disclaimer />

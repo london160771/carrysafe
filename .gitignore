@@ -6,3 +6,6 @@ dist/
 .vercel/
 *.log
 .DS_Store
+firestore-debug.log
+ui-debug.log
+!.env.emulators

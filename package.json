@@ -13,7 +13,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "lint": "eslint . --max-warnings 0",
-    "verify": "npm run lint && npm run test && npm run build"
+    "verify": "npm run lint && npm run test && npm run build",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-carrysafe \"vitest run --config vitest.rules.config.js\"",
+    "dev:emulators": "firebase emulators:exec --only firestore,auth --project demo-carrysafe \"vite --mode emulators\""
   },
   "dependencies": {
     "bootstrap": "5.3.9",
@@ -23,11 +25,13 @@
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
+    "@firebase/rules-unit-testing": "6.0.0",
     "@testing-library/react": "16.3.3",
     "@vitejs/plugin-react": "6.3.0",
     "eslint": "10.15.0",
     "eslint-plugin-react-hooks": "7.1.1",
     "eslint-plugin-react-refresh": "0.5.8",
+    "firebase-tools": "15.36.0",
     "globals": "17.14.0",
     "jsdom": "31.0.1",
     "vite": "8.3.8",

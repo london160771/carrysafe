@@ -5,6 +5,18 @@ service cloud.firestore {
       return request.auth != null;
     }
 
+    function isMember(tripId) {
+      return signedIn() && exists(/databases/$(database)/documents/trips/$(tripId)/members/$(request.auth.uid));
+    }
+
+    function routeCountries() {
+      return ['NG', 'AE', 'JP', 'SG', 'GR', 'GB', 'US', 'QA', 'TR', 'FR', 'DE', 'NL', 'IN', 'KE', 'GH', 'ZA', 'EG', 'SA', 'CA', 'AU'];
+    }
+
+    function verdicts() {
+      return ['allowed', 'needs_documents', 'prohibited', 'not_confirmed', 'not_covered'];
+    }
+
     function isRuleEntry(data) {
       return data.keys().hasOnly(['ingredient', 'country', 'verdict', 'quote', 'conditions', 'sourceUrl', 'authority', 'fetchedAt', 'contentHash', 'updatedAt'])
         && data.verdict in ['allowed', 'needs_documents', 'prohibited']
@@ -12,10 +24,47 @@ service cloud.firestore {
         && data.quote is string && data.quote.size() <= 2000;
     }
 
+    function isTrip(data) {
+      return data.keys().hasOnly(['route', 'createdAt', 'createdBy', 'startDate', 'endDate'])
+        && data.createdBy == request.auth.uid
+        && data.route is list && data.route.size() >= 2 && data.route.size() <= 8;
+    }
+
+    function isMemberEntry(data) {
+      return data.keys().hasOnly(['displayLabel', 'joinedAt'])
+        && data.displayLabel is string && data.displayLabel.size() > 0 && data.displayLabel.size() <= 30;
+    }
+
+    function isStatus(data) {
+      return data.keys().hasOnly(['perCountry', 'updatedAt'])
+        && data.perCountry is map
+        && data.perCountry.keys().hasOnly(routeCountries())
+        && data.perCountry.values().hasOnly(verdicts());
+    }
+
     match /rules/{ruleId} {
       allow read: if signedIn();
       allow create, update: if signedIn() && isRuleEntry(request.resource.data);
       allow delete: if false;
+    }
+
+    match /trips/{tripId} {
+      allow read: if isMember(tripId);
+      allow create: if signedIn() && isTrip(request.resource.data);
+      allow update: if signedIn() && resource.data.createdBy == request.auth.uid && isTrip(request.resource.data);
+      allow delete: if false;
+
+      match /members/{uid} {
+        allow read: if isMember(tripId);
+        allow create, update: if signedIn() && request.auth.uid == uid && isMemberEntry(request.resource.data);
+        allow delete: if signedIn() && request.auth.uid == uid;
+      }
+
+      match /status/{uid} {
+        allow read: if isMember(tripId);
+        allow create, update: if isMember(tripId) && request.auth.uid == uid && isStatus(request.resource.data);
+        allow delete: if signedIn() && request.auth.uid == uid;
+      }
     }
   }
 }

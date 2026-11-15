@@ -9,8 +9,8 @@ Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: clou
 | On-device label reading + Framing Coach (Gemini Nano) | Real | [badge screenshot / video timestamp] |
 | Official page fetch (`/api/source`, 6 countries) | Real | `api/source.test.js`; fetch log in `docs/gate0.md` |
 | Cloud verdict + word-for-word quote check | Real code; live run pending Firebase config | `src/core/verifyQuote.test.js`, `src/check/checkStop.test.js` |
-| Request guard + lab | Real | `src/privacy/buildCloudRequest.test.js` (guard); lab in Phase 3 |
-| Group trip status (Firestore) | Real | [rules tests] |
+| Request guard + lab | Real | `src/privacy/buildCloudRequest.test.js`, `src/lab/attempts.test.js`; lab 5/5 in the emulator run |
+| Group trip status (Firestore) | Real | `tests/rules/firestore.rules.test.js` (emulator) |
 | Saved backup verdicts | Real quotes saved earlier, used only if a fetch fails | "Saved copy from [date]" label |
 | Seeded "Amaka-Tokyo" trip | Sample data, real checks | `DEMO TRIP` label |
 | Sample medicine photos in Judge Mode | Sample images | "Sample photo" caption |
