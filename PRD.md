@@ -362,8 +362,8 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 - A page can't be fetched → use its saved verdict with a date, or swap to another official URL for that country.
 
 **Acceptance requirements:**
-1. Image → JSON on 5 real medicine boxes; outputs + timings recorded.
-2. A cut-off label photo gets the right hint from the Framing Coach.
+1. Image → JSON on the 3 real photos in `samples/real/` + the generated sample labels; outputs + timings recorded against `samples/README.md` ground truth.
+2. `samples/real/broncholyte-front.jpg` (cut off on the right) gets the right hint from the Framing Coach.
 3. `/api/source` fetches the official page(s) for JP and AE (plus SG, GR, GB, US); text length + hash recorded.
 4. For pseudoephedrine × JP, methylphenidate × AE and paracetamol × JP, the model returns a verdict + a quote, and `verifyQuote` passes.
 5. AI Logic free-tier model with JSON output works under App Check (debug token).
@@ -391,7 +391,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Local name finder → roadmap | Needs open web search |
 | 2026-11-15 | Agents run phases continuously; they stop only when Adesope is needed, with a simple guide (CLAUDE.md §10) | Adesope's instruction |
 | 2026-11-15 | Repo = github.com/london160771/carrysafe. Agents commit AND push to GitHub at the end of every phase that passes verify | Adesope's instruction |
-| 2026-11-15 | Medicine box photos: on hold until Adesope provides them; Gate 0 step 1–2 waits, other work continues | Adesope's instruction |
+| 2026-11-15 | Medicine photos: 3 real photos in `samples/real/` (bromhexine syrup EN + FR side, orphenadrine + paracetamol blister). Seed ingredients without photos get code-generated sample labels (no brands, marked SAMPLE) | Adesope's photos; web product photos avoided (copyright) |
 
 ---
 
@@ -690,6 +690,5 @@ After the internal cutoff: fixes only. After the deadline: demo stays live, no f
 | # | Question | Owner | Decide by |
 |---|---|---|---|
 | 2 | Can a reCAPTCHA Enterprise key be created without billing? If not → debug token | Adesope | Phase 0 |
-| 3 | Real medicine box photos for Gate 0 (pseudoephedrine product, a prescription box, paracetamol): **on hold**, Adesope will send later | Adesope | Before Phase 1 ends |
 
 When answered, move the answer to §16.

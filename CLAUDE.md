@@ -125,7 +125,7 @@ For each phase:
 
 **STOP and wait for Adesope only when:**
 - You need something only he can do: an account login, a console setting, a key or token, Vercel access, running on-device tests on his laptop, recording video, the Devpost submission.
-- **Medicine box photos are on hold.** Don't stop for them. Build with typed entries and a sample image, and ask for photos only when a step truly can't continue without them.
+- **Medicine photos:** 3 real photos are in `samples/real/` (see `samples/README.md` for ground truth). For pseudoephedrine and methylphenidate, generate plain sample labels in `samples/generated/` (generic names, "SAMPLE LABEL" text, no brands). Don't stop for more photos.
 - Reality contradicts the PRD and a decision is needed (the fix isn't obvious, or it changes scope, cost, privacy or the demo story).
 - Something would cost money, delete data, or can't be undone.
 - A test or gate keeps failing after a reasonable fix attempt.
