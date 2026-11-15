@@ -9,7 +9,7 @@
 
 ## 1. Right now
 
-- **Active phase:** Phase 3 done (panel, lab 5/5, group trip, rules tests). Real verdicts still wait on the Firebase web config + App Check debug token (Gate 0 steps 4–5).
+- **Active phase:** Phase 4 code done. P0 code is complete; Phase 5 (P1) waits until P0 is deployed and recorded (PRD §26). Real cloud runs wait on the Firebase web config + App Check debug token.
 - **Status:** Scaffold, Firebase init, `/api/source` (real HTML fetch, allow-list, timeout, size cap), `sources.json` (6 countries, 8 pages), Gate 0 harness (`/gate0.html`), generated sample labels. `npm run verify` passes.
 - **Next step:** Adesope: Firebase web config in `.env.local` + Vercel, App Check debug token, Vercel team access, run `/gate0.html` on the demo laptop. Decision on Japan pseudoephedrine category (see `docs/gate0.md`).
 - **Blocked by:** Firebase web config + debug token (Gate 0 step 5); Vercel access (deploy); demo laptop (steps 1, 2, 6).
@@ -22,7 +22,7 @@
 | 1: Private scan + request guard | Code done; on-device run pending on demo laptop | 2026-11-15 | `feat: phase 1 private scan + request guard` | A: done (2 fixes) |
 | 2: Official-source route check | Code done; live verdicts pending Firebase config | 2026-11-15 | `feat: phase 2 official-source route check` | B: done (2 gaps logged) |
 | 3: Proof + group | Done (emulator); rules deploy pending | 2026-11-15 | `feat: phase 3 proof panel, lab, group trip` | — |
-| 4: Border Card + accessibility | Not started | | | — |
+| 4: Border Card + accessibility | Code done; real translation/voice/screen reader pending | 2026-11-15 | `feat: phase 4 border card, officer mode, voice, a11y` | — |
 | 5: P1 extras | Not started | | | — |
 | 6: Judge Mode, README, video, submit | Not started | | | C |
 
@@ -30,7 +30,7 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 27 files / 129 tests, build OK | 2026-11-15 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 30 files / 133 tests, build OK | 2026-11-15 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
 | UI at 390px | Playwright screenshot of `/` and `/gate0.html` | no horizontal scroll (scrollWidth 390) | 2026-11-15 |
 | Seed "Amaka-Tokyo" | manual | — | — |
@@ -81,6 +81,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-15** — Phase 4: translateCard, Border Card, Show the Officer, voice add, settings bar. Report: `docs/phase-reports/phase-4.md`.
 
 - **2026-11-15** — Phase 3: outgoing log panel, privacy lab (5/5 blocked in emulator run), group trip + status grid, Firestore rules + 7 emulator tests, emulator dev mode. Report: `docs/phase-reports/phase-3.md`.
 

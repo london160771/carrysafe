@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import ScanPanel from '../scan/ScanPanel.jsx';
 import TypePanel from '../scan/TypePanel.jsx';
+import VoicePanel from '../scan/VoicePanel.jsx';
 import ConfirmPanel from './ConfirmPanel.jsx';
 import MedList from './MedList.jsx';
 
 const MODES = [
   { id: 'scan', label: 'Scan' },
   { id: 'type', label: 'Type' },
+  { id: 'voice', label: 'Speak' },
 ];
 
 export default function AddMedicine({ meds, saveMed, removeMed }) {
@@ -31,11 +33,9 @@ export default function AddMedicine({ meds, saveMed, removeMed }) {
       </div>
       <div className="card mb-3">
         <div className="card-body">
-          {mode === 'scan' ? (
-            <ScanPanel onDraft={(draft, isSample) => setPending({ draft, isSample })} />
-          ) : (
-            <TypePanel onDraft={(draft) => setPending({ draft, isSample: false })} />
-          )}
+          {mode === 'scan' && <ScanPanel onDraft={(draft, isSample) => setPending({ draft, isSample })} />}
+          {mode === 'type' && <TypePanel onDraft={(draft) => setPending({ draft, isSample: false })} />}
+          {mode === 'voice' && <VoicePanel onDraft={(draft) => setPending({ draft, isSample: false })} />}
         </div>
       </div>
       {pending && (

@@ -25,9 +25,9 @@ export function cloudModel(generationConfig) {
   });
 }
 
-export function preferCloudModel() {
+export function preferCloudModel(generationConfig) {
   return getGenerativeModel(getAppAI(), {
     mode: InferenceMode.PREFER_IN_CLOUD,
-    inCloudParams: { model: CLOUD_MODEL },
+    inCloudParams: { model: CLOUD_MODEL, generationConfig },
   });
 }

@@ -1,6 +1,6 @@
-export const DEFAULT_SPEECH_RATE = 1;
+import { getSettings } from '../settings/settingsStore.js';
 
-export function speakText(text, { lang = 'en-GB', rate = DEFAULT_SPEECH_RATE } = {}) {
+export function speakText(text, { lang = 'en-GB', rate = getSettings().speechRate } = {}) {
   const synthesis = globalThis.speechSynthesis;
   if (!synthesis || !text) return false;
   synthesis.cancel();
@@ -11,4 +11,9 @@ export function speakText(text, { lang = 'en-GB', rate = DEFAULT_SPEECH_RATE } =
   if (voice) utterance.voice = voice;
   synthesis.speak(utterance);
   return true;
+}
+
+export function hasVoiceFor(lang) {
+  const prefix = lang.slice(0, 2).toLowerCase();
+  return (globalThis.speechSynthesis?.getVoices() ?? []).some((voice) => voice.lang?.toLowerCase().startsWith(prefix));
 }

@@ -1,4 +1,6 @@
+import BorderCardScreen from '../card/BorderCardScreen.jsx';
 import AddMedicine from '../meds/AddMedicine.jsx';
+import SettingsBar from '../settings/SettingsBar.jsx';
 import { useMedStore } from '../meds/useMedStore.js';
 import PanelScreen from '../panel/PanelScreen.jsx';
 import ResultsScreen from '../results/ResultsScreen.jsx';
@@ -15,6 +17,7 @@ const SCREENS = [
   { id: 'add', label: 'Add medicine' },
   { id: 'results', label: 'Results' },
   { id: 'panel', label: 'What left your laptop' },
+  { id: 'card', label: 'Border Card' },
 ];
 
 export default function App() {
@@ -37,6 +40,7 @@ export default function App() {
       >
         Skip to content
       </a>
+      <SettingsBar />
       <header className="bg-white border-bottom">
         <div className="container py-3">
           <h1 className="h3 mb-1">Carry Safe</h1>
@@ -66,6 +70,7 @@ export default function App() {
         {screen === 'add' && <AddMedicine {...medStore} />}
         {screen === 'results' && <ResultsScreen route={trip.route} meds={medStore.meds} results={trip.results} progress={trip.progress} onRun={trip.runChecks} />}
         {screen === 'panel' && <PanelScreen />}
+        {screen === 'card' && <BorderCardScreen meds={medStore.meds} />}
       </main>
       <footer className="container pb-4">
         <Disclaimer />

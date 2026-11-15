@@ -18,3 +18,55 @@ body {
   outline: 3px solid var(--cs-accent);
   outline-offset: 2px;
 }
+
+html.cs-big-text {
+  font-size: 125%;
+}
+
+html.cs-high-contrast body {
+  background: #000;
+  color: #fff;
+}
+
+html.cs-high-contrast .card,
+html.cs-high-contrast .list-group-item,
+html.cs-high-contrast header,
+html.cs-high-contrast .cs-settings,
+html.cs-high-contrast pre,
+html.cs-high-contrast .table {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  --bs-table-bg: #000;
+  --bs-table-color: #fff;
+}
+
+html.cs-high-contrast a,
+html.cs-high-contrast .nav-link:not(.active) {
+  color: #ffd400;
+}
+
+html.cs-high-contrast .text-body-secondary {
+  color: #e6e6e6 !important;
+}
+
+.cs-officer {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  overflow-y: auto;
+  background: #000;
+  color: #fff;
+  padding: 1.5rem;
+}
+
+.cs-officer h2,
+.cs-officer li {
+  font-size: clamp(1.4rem, 5vw, 2.6rem);
+  line-height: 1.35;
+}
+
+.cs-officer .cs-officer-en {
+  color: #ffd400;
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
+}
