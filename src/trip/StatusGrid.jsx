@@ -1,5 +1,5 @@
 import { countryName } from '../data/countries.js';
-import { VERDICT_LABELS } from '../results/verdictLabels.js';
+import VerdictBadge from '../results/VerdictBadge.jsx';
 
 export default function StatusGrid({ members, status }) {
   const memberIds = Object.keys(members);
@@ -7,11 +7,11 @@ export default function StatusGrid({ members, status }) {
   if (memberIds.length === 0) return null;
   return (
     <div className="table-responsive">
-      <table className="table table-sm align-middle">
-        <caption className="small">Group status only. Nobody sees anyone else’s medicine.</caption>
+      <table className="table cs-table align-middle">
+        <caption className="cs-small cs-muted">Only the status is shared. Nobody sees anyone’s medicine.</caption>
         <thead>
           <tr>
-            <th scope="col">Traveller</th>
+            <th scope="col">Who</th>
             {countries.map((country) => (
               <th scope="col" key={country}>{countryName(country)}</th>
             ))}
@@ -20,21 +20,10 @@ export default function StatusGrid({ members, status }) {
         <tbody>
           {memberIds.map((uid) => (
             <tr key={uid}>
-              <th scope="row">{members[uid].displayLabel}</th>
+              <th scope="row" className="fw-medium">{members[uid].displayLabel}</th>
               {countries.map((country) => {
                 const verdict = status[uid]?.perCountry?.[country];
-                const label = VERDICT_LABELS[verdict];
-                return (
-                  <td key={country}>
-                    {label ? (
-                      <>
-                        <span aria-hidden="true">{label.icon}</span> {label.word}
-                      </>
-                    ) : (
-                      <span className="text-body-secondary">Not shared yet</span>
-                    )}
-                  </td>
-                );
+                return <td key={country}>{verdict ? <VerdictBadge verdict={verdict} /> : <span className="cs-small cs-muted">Not shared yet</span>}</td>;
               })}
             </tr>
           ))}

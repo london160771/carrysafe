@@ -1,0 +1,96 @@
+.cs-route {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cs-route li {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding-top: 28px;
+}
+
+.cs-route li::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed var(--cs-line-strong);
+}
+
+.cs-route li:first-child::before {
+  left: 8px;
+}
+
+.cs-route li:last-child::before {
+  right: auto;
+  width: 8px;
+}
+
+.cs-route-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cs-surface);
+  border: 2px solid var(--cs-text);
+}
+
+.cs-route li:first-child .cs-route-dot,
+.cs-route li:last-child .cs-route-dot {
+  background: var(--cs-text);
+}
+
+.cs-route-place {
+  display: block;
+  font-weight: 500;
+  line-height: 1.3;
+  padding-right: 8px;
+}
+
+.cs-route-role {
+  display: block;
+  font-size: 0.8125rem;
+  color: var(--cs-text-2);
+}
+
+.cs-route-status {
+  margin-top: 8px;
+}
+
+.cs-pass {
+  background: var(--cs-surface);
+  border-radius: var(--cs-radius-panel);
+  box-shadow: var(--cs-shadow);
+  padding: 24px;
+}
+
+.cs-pass-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.875rem;
+  color: var(--cs-text-2);
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+  border-bottom: 1px dashed var(--cs-line-strong);
+}
+
+.cs-pass-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--cs-line);
+  font-size: 0.875rem;
+  color: var(--cs-text-2);
+}

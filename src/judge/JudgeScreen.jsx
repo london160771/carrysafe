@@ -1,11 +1,18 @@
+import { Play } from 'lucide-react';
 import { useState } from 'react';
 import ErrorNotice from '../app/ErrorNotice.jsx';
+import Link from '../app/Link.jsx';
+import { navigate } from '../app/navigation.js';
+import PageHeader from '../app/PageHeader.jsx';
+import RouteLine from '../trip/RouteLine.jsx';
 import { DEMO_MEDS, DEMO_ROUTE } from './seed.js';
 
-const PATH = [
-  { href: '#/results', text: 'Results: Japan, with “Quote found on official page ✓”' },
-  { href: '#/panel', text: 'What left your laptop → Try to break it' },
-  { href: '#/card', text: 'Border Card → Show the Officer → Read aloud in Japanese' },
+const PHOTO = { src: '/photos/mother-and-daughter-packing.webp', alt: 'A mother and daughter packing a suitcase together' };
+
+const TOUR = [
+  { to: '/results', text: 'Results: Japan, with “Quote found on official page ✓”' },
+  { to: '/privacy', text: 'What left your laptop, then Try to break it' },
+  { to: '/card', text: 'Border card, then Show the Officer, then Read aloud in Japanese' },
 ];
 
 export default function JudgeScreen({ medStore, trip }) {
@@ -21,7 +28,7 @@ export default function JudgeScreen({ medStore, trip }) {
       trip.setRoute([...DEMO_ROUTE]);
       await trip.runChecks(DEMO_MEDS, DEMO_ROUTE);
       setState('done');
-      window.location.hash = '#/results';
+      navigate('/results');
     } catch (caught) {
       setError(caught);
       setState('idle');
@@ -29,27 +36,38 @@ export default function JudgeScreen({ medStore, trip }) {
   }
 
   return (
-    <section aria-labelledby="judge-heading">
-      <p className="badge text-bg-warning fs-6">DEMO TRIP · sample data, real checks</p>
-      <h2 className="h4" id="judge-heading">Judge Mode: Amaka-Tokyo</h2>
-      <p>
-        Amaka flies Lagos → Dubai → Tokyo with her mum. Amaka carries methylphenidate. Mum carries pseudoephedrine cold tablets and paracetamol. Carry Safe checks every stop, including the Dubai layover, against
-        official government pages.
-      </p>
-      <p className="small">No sign-up. This replaces the medicines on this device with the demo trip. Only ingredient names and country codes leave the device.</p>
-      <button type="button" className="btn btn-primary btn-lg mb-3" disabled={state === 'running'} onClick={runDemo}>
-        {state === 'running' ? `Checking ${trip.progress ? `${trip.progress.done + 1} of ${trip.progress.total}` : ''}…` : 'Run the demo trip'}
-      </button>
-      <ErrorNotice error={error} />
-      <h3 className="h5">The 60-second path</h3>
-      <ol>
-        <li>Run the demo trip (above).</li>
-        {PATH.map((step) => (
-          <li key={step.href}>
-            <a href={step.href}>{step.text}</a>
-          </li>
-        ))}
-      </ol>
-    </section>
+    <div className="container cs-page">
+      <PageHeader
+        id="judge-heading"
+        title="Demo trip: Amaka goes to Tokyo"
+        lead="Amaka flies from Lagos to Tokyo through Dubai with her mum. Amaka takes methylphenidate. Mum takes pseudoephedrine cold tablets and paracetamol."
+        photo={PHOTO}
+      >
+        <p className="cs-tag is-demo mt-3">Demo trip · sample data, real checks</p>
+      </PageHeader>
+      <div className="cs-grid-2">
+        <section className="cs-panel" aria-labelledby="run-heading">
+          <h2 className="cs-panel-title" id="run-heading">Run it</h2>
+          <p className="cs-panel-lead">No sign-up. This swaps the medicines on this device for the demo ones. Only ingredient names and countries are sent.</p>
+          <RouteLine route={DEMO_ROUTE} />
+          <button type="button" className="btn btn-primary btn-lg mt-4" disabled={state === 'running'} onClick={runDemo}>
+            <Play size={18} strokeWidth={1.5} aria-hidden="true" />
+            {state === 'running' ? `Checking ${trip.progress ? `${trip.progress.done + 1} of ${trip.progress.total}` : ''}…` : 'Run the demo trip'}
+          </button>
+          <ErrorNotice error={error} />
+        </section>
+        <section className="cs-panel" aria-labelledby="tour-heading">
+          <h2 className="cs-panel-title" id="tour-heading">The 60-second tour</h2>
+          <ol className="cs-tour">
+            <li>Run the demo trip</li>
+            {TOUR.map((step) => (
+              <li key={step.to}>
+                <Link to={step.to}>{step.text}</Link>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </div>
+    </div>
   );
 }

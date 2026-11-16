@@ -15,7 +15,7 @@ describe('describeDeviceStatus (FR-SCAN-004)', () => {
     for (const state of ['unsupported', 'unavailable', undefined]) {
       const status = describeDeviceStatus(state);
       expect(status.usable).toBe(false);
-      expect(status.reason).toMatch(/type the medicine/);
+      expect(status.reason).toMatch(/type the name instead/);
     }
   });
 });

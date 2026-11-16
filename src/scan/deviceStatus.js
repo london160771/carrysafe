@@ -2,10 +2,10 @@ export const USABLE_STATES = Object.freeze(['available', 'downloadable', 'downlo
 
 export function describeDeviceStatus(availability) {
   if (USABLE_STATES.includes(availability)) {
-    return { usable: true, reason: availability === 'available' ? '' : 'The on-device model will download first. This can take a few minutes.' };
+    return { usable: true, reason: availability === 'available' ? '' : 'The reading model downloads first. This can take a few minutes.' };
   }
   if (availability === 'unsupported') {
-    return { usable: false, reason: 'Scanning needs desktop Chrome 139+ with the on-device model. You can type the medicine instead.' };
+    return { usable: false, reason: 'It needs desktop Chrome 139 or newer. You can type the name instead.' };
   }
-  return { usable: false, reason: 'The on-device model is not available on this computer. You can type the medicine instead.' };
+  return { usable: false, reason: 'This computer can’t run the reading model. You can type the name instead.' };
 }

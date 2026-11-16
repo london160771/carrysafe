@@ -3,10 +3,10 @@ import RanOnBadge from '../app/RanOnBadge.jsx';
 import { confirmMedicine } from './medicine.js';
 
 const SOURCE_NOTES = {
-  device: 'Read on this device. Check it against your box.',
-  typed: 'Typed by you.',
-  voice: 'Heard from your voice. Check the spelling.',
-  suggestion: 'Suggestion: check your box. The cloud guessed these from the brand name.',
+  device: 'Read on this device. Compare it with your box.',
+  typed: 'You typed this.',
+  voice: 'We heard this. Check the spelling.',
+  suggestion: 'A guess from the brand name. Compare it with your box.',
 };
 
 export default function ConfirmPanel({ draft, isSample, onConfirm, onCancel }) {
@@ -32,31 +32,31 @@ export default function ConfirmPanel({ draft, isSample, onConfirm, onCancel }) {
   }
 
   return (
-    <form className="card border-primary" onSubmit={confirm} aria-labelledby="confirm-heading">
-      <div className="card-body">
-        <h3 className="h5" id="confirm-heading">Confirm the ingredients</h3>
-        <p className="mb-2">
+    <form className="cs-panel cs-panel-accent" onSubmit={confirm} aria-labelledby="confirm-heading">
+      <div>
+        <h2 className="cs-panel-title" id="confirm-heading">Is this right?</h2>
+        <p className="cs-muted d-flex flex-wrap align-items-center gap-2">
           {SOURCE_NOTES[draft.source]} <RanOnBadge inferenceSource={draft.inferenceSource} />
         </p>
-        {isSample && <p className="badge text-bg-warning">Sample photo</p>}
+        {isSample && <p className="cs-tag is-demo">Sample photo</p>}
         {draft.brand && <p className="mb-2">Brand on the box: {draft.brand}</p>}
-        <label className="form-label" htmlFor="confirm-ingredients">Active ingredients (separate with commas)</label>
-        <input id="confirm-ingredients" className="form-control mb-2" value={ingredients} onChange={(event) => setIngredients(event.target.value)} required />
+        <label className="form-label" htmlFor="confirm-ingredients">Ingredients (put a comma between each)</label>
+        <input id="confirm-ingredients" className="form-control mb-3" value={ingredients} onChange={(event) => setIngredients(event.target.value)} required />
         <div className="row g-2 mb-3">
           <div className="col-sm-6">
             <label className="form-label" htmlFor="confirm-strength">Strength</label>
             <input id="confirm-strength" className="form-control" value={strength} onChange={(event) => setStrength(event.target.value)} />
           </div>
           <div className="col-sm-6">
-            <label className="form-label" htmlFor="confirm-quantity">Quantity</label>
+            <label className="form-label" htmlFor="confirm-quantity">How many</label>
             <input id="confirm-quantity" className="form-control" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
           </div>
         </div>
-        <p className="small">Nothing about this medicine is checked in the cloud until you confirm.</p>
-        {problem && <p className="text-danger" role="alert">{problem}</p>}
+        <p className="cs-small cs-muted">Nothing is checked until you save.</p>
+        {problem && <p className="cs-text-bad" role="alert">{problem}</p>}
         <div className="d-flex gap-2">
-          <button type="submit" className="btn btn-success">Confirm</button>
-          <button type="button" className="btn btn-outline-secondary" onClick={onCancel}>Cancel</button>
+          <button type="submit" className="btn btn-primary">Yes, save it</button>
+          <button type="button" className="btn btn-secondary-soft" onClick={onCancel}>Cancel</button>
         </div>
       </div>
     </form>

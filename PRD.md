@@ -398,6 +398,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | INV-3 hardened: quotes ≥ 20 chars; curly quotes/dashes folded (models often straighten them); "needs documents" also needs a verified quote; cached verdicts re-verified | Phase 2 build; FCDO pages use curly apostrophes |
 | 2026-11-15 | Japan + pseudoephedrine: let the verified quote decide; keep both official pages (MHLW NCD + UK FCDO). The demo may show ⚠ needs documents instead of ⛔ | Adesope's choice on the decision card |
 | 2026-11-16 | Cloud model = `gemini-3.5-flash-lite` | `gemini-2.5-flash` returns 404 for new projects; `gemini-3.8-flash` gave no response in 170 s; flash-lite answered in 1.3 s (`docs/gate0.md`) |
+| 2026-11-16 | UI redesign (Adesope): warm light theme, Instrument Sans/Serif + lucide icons self-hosted (no new outbound calls), plain-language copy, stock photos from Pexels stored in `public/photos/` and labelled as illustrations. Screens use real paths (`/`, `/add`, `/results`, `/privacy`, `/card`, `/judge`, `/join/:id`); old `/#/` links redirect | Adesope's request; same 6 screens (§21) |
 
 ---
 
@@ -469,7 +470,7 @@ Real requests through the real code, each blocked live:
 1. **Trip:** route builder + status grid.
 2. **Add medicine:** Scan (Framing Coach), Type, Speak; confirm ingredients.
 3. **Results:** per medicine × stop: ✅/⚠/⛔ + conditions + official quote + link + "Ran on" badge + date.
-4. **What left your laptop:** the outgoing payload log + the lab buttons.
+4. **What left your laptop** (`/privacy`): the outgoing payload log + the lab buttons.
 5. **Border Card / Show the Officer:** English + Japanese; full-screen; read aloud.
 6. **Judge Mode `/judge`** (H): seeded trip, "Run the demo trip", "Try to break it", the 60-second path.
 

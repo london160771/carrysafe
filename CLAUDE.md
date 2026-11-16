@@ -102,6 +102,8 @@ Check installed versions first.
 - **Official pages that block bots:** cbp.gov (403), mohap.gov.ae (reset), Japanese embassy sites (403). See `docs/gate0.md`.
 - **Vitest 5:** a function returned from `beforeEach` runs as teardown. Write `beforeEach(() => { mock.mockReset(); })` with braces, or the mock gets called after the test.
 - **Cloud model (2026-11-16):** `gemini-2.5-flash` is closed to new projects (404); `gemini-3.8-flash` hung > 170 s; use `gemini-3.5-flash-lite` (`src/ai/models.js`).
+- **Routing (2026-11-16):** real paths, not `/#/` (`src/app/routes.js`, `navigation.js`, `Link.jsx`). `vercel.json` rewrites every non-`/api/` path to `index.html`; files like `/gate0.html` and `/photos/*` are served first. Old `/#/x` links are redirected in `main.jsx`.
+- **No CDN fonts or images:** fonts come from `@fontsource`, icons from `lucide-react`, photos from `public/photos/` (PRD §14 lists the only outbound calls).
 - [Add breaking changes here as you find them.]
 
 ## 9. Code quality

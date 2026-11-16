@@ -30,9 +30,9 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 31 files / 135 tests, build OK | 2026-11-15 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 33 files / 142 tests, build OK | 2026-11-16 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
-| UI at 390px | Playwright screenshot of `/` and `/gate0.html` | no horizontal scroll (scrollWidth 390) | 2026-11-15 |
+| UI at 390px | Playwright on all 6 pages + `/join/:id` + old `/#/panel` link | no horizontal scroll (scrollWidth 390); old hash link lands on `/privacy` | 2026-11-16 |
 | Seed "Amaka-Tokyo" | manual | — | — |
 
 ## 4. What works (verified)
@@ -82,6 +82,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Live on Vercel at https://carrysafe-rho.vercel.app (from `main` e3987ae; `/`, `/judge`, `/gate0.html` 200; `/api/source?country=SG` returns the HSA page; bad country and extra params rejected with `source_not_allowed`). UI redesign: warm light theme, self-hosted fonts and icons, plain wording, Pexels photos (`public/photos/CREDITS.md`), real paths instead of `/#/` (old links redirect). Verify: lint clean, 33 files / 142 tests, build OK. Report: `docs/phase-reports/ui-redesign.md`.
 
 - **2026-11-16** — Rules published; live rule cache (2nd run 4.1 s from cache), live group trip (Mum's status seen by Amaka), live lab 5/5.
 

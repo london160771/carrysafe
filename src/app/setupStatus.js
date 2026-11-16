@@ -4,17 +4,17 @@ export function describeSetup(env, hasPromptApi) {
   let firebase;
   try {
     readFirebaseConfig(env);
-    firebase = { ok: true, label: 'Firebase web config found' };
+    firebase = { ok: true, label: 'Firebase connected' };
   } catch (error) {
     firebase = { ok: false, label: `Firebase not configured (${error.detail})` };
   }
   return [
     firebase,
     readAppCheckSiteKey(env)
-      ? { ok: true, label: 'App Check: reCAPTCHA Enterprise' }
-      : { ok: false, label: 'App Check: debug token mode (register the token in the Firebase console)' },
+      ? { ok: true, label: 'Cloud check protected by reCAPTCHA' }
+      : { ok: false, label: 'Cloud check in test mode: needs a registered debug token' },
     hasPromptApi
-      ? { ok: true, label: 'On-device model API found in this browser' }
-      : { ok: false, label: 'On-device model API not found: scanning needs desktop Chrome 139+' },
+      ? { ok: true, label: 'Label reading works in this browser' }
+      : { ok: false, label: 'Label reading needs desktop Chrome 139+' },
   ];
 }

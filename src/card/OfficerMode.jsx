@@ -26,7 +26,7 @@ export default function OfficerMode({ card, travellerName, english, onClose }) {
         </button>
       </div>
       {!hasVoiceFor('ja-JP') && (
-        <p className="text-warning" lang="en">No Japanese voice found on this device. Show the screen instead.</p>
+        <p className="text-warning" lang="en">No Japanese voice on this device. Show the screen instead.</p>
       )}
       <h2 id="officer-heading">{card.heading}</h2>
       <p className="cs-officer-en" lang="en">{english.heading}</p>

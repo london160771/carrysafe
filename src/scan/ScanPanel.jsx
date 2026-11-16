@@ -1,3 +1,4 @@
+import { ScanLine, TriangleAlert } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { extractLabel, framingCoach, hasOnDeviceModel } from '../ai/onDevice.js';
 import ErrorNotice from '../app/ErrorNotice.jsx';
@@ -58,24 +59,26 @@ export default function ScanPanel({ onDraft }) {
 
   return (
     <section aria-labelledby="scan-heading">
-      <h3 className="h5" id="scan-heading">Scan the box</h3>
+      <h2 className="cs-panel-title" id="scan-heading">Scan the box</h2>
+      <p className="cs-panel-lead">Your laptop reads the label. The photo stays here.</p>
       {!status.usable && (
-        <p className="alert alert-secondary" role="status">
-          <span aria-hidden="true">⚠</span> Scan unavailable: {status.reason}
+        <p className="cs-notice is-info mt-0 mb-3" role="status">
+          <TriangleAlert size={16} strokeWidth={1.5} aria-hidden="true" />
+          <span>Scanning is not available here. {status.reason}</span>
         </p>
       )}
-      {status.usable && status.reason && <p className="small">{status.reason}</p>}
-      <fieldset disabled={!status.usable || busy !== ''}>
-        <label className="form-label" htmlFor="photo-input">Take or choose a photo of the label</label>
+      {status.usable && status.reason && <p className="cs-small cs-muted">{status.reason}</p>}
+      <fieldset disabled={!status.usable || busy !== ''} className="mb-0">
+        <label className="form-label" htmlFor="photo-input">Photo of the label</label>
         <input
           id="photo-input"
-          className="form-control mb-2"
+          className="form-control mb-3"
           type="file"
           accept="image/jpeg,image/png"
           capture="environment"
           onChange={(event) => event.target.files[0] && choosePhoto(event.target.files[0], 'Your photo', false)}
         />
-        <label className="form-label" htmlFor="sample-select">Or use a sample photo</label>
+        <label className="form-label" htmlFor="sample-select">Or try a sample photo</label>
         <select
           id="sample-select"
           className="form-select mb-3"
@@ -85,30 +88,31 @@ export default function ScanPanel({ onDraft }) {
             if (sample) choosePhoto(await loadSample(sample), `Sample photo: ${sample.id}`, true);
           }}
         >
-          <option value="">Choose a sample…</option>
+          <option value="">Choose a sample</option>
           {SAMPLES.map((sample) => (
             <option key={sample.id} value={sample.id}>{sample.id}</option>
           ))}
         </select>
         {photo && (
           <figure className="mb-3">
-            <img src={photo.previewUrl} alt="The medicine label to read" className="img-fluid border rounded" style={{ maxHeight: 220 }} />
-            <figcaption className="small text-body-secondary">{photo.label} · stays on this device</figcaption>
+            <img src={photo.previewUrl} alt="The medicine label to read" className="img-fluid rounded-3 border" style={{ maxHeight: 220 }} />
+            <figcaption className="cs-small cs-muted mt-2">{photo.label} · stays on this device</figcaption>
           </figure>
         )}
         <div className="d-flex flex-wrap gap-2">
-          <button type="button" className="btn btn-outline-primary" disabled={!photo} onClick={checkFraming}>
-            {busy === 'framing' ? 'Checking framing…' : '1. Check framing'}
+          <button type="button" className="btn btn-secondary-soft" disabled={!photo} onClick={checkFraming}>
+            {busy === 'framing' ? 'Checking the photo…' : '1. Check the photo'}
           </button>
           <button type="button" className="btn btn-primary" disabled={!photo} onClick={readLabel}>
-            {busy === 'reading' ? 'Reading label on this device…' : '2. Read label'}
+            <ScanLine size={16} strokeWidth={1.5} aria-hidden="true" />
+            {busy === 'reading' ? 'Reading on this device…' : '2. Read the label'}
           </button>
         </div>
       </fieldset>
       <div aria-live="polite" className="mt-3">
         {framing && (
           <p>
-            <span aria-hidden="true">{framing.readable ? '✅' : '⚠'}</span> {framing.readable ? 'Readable' : 'Not readable yet'}: {framing.hint}{' '}
+            <strong>{framing.readable ? 'Good photo' : 'Not clear yet'}:</strong> {framing.hint}{' '}
             <RanOnBadge inferenceSource={framing.inferenceSource} />
           </p>
         )}

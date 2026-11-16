@@ -9,7 +9,7 @@
   },
   "rewrites": [
     {
-      "source": "/judge",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]

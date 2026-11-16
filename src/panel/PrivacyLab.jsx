@@ -1,3 +1,4 @@
+import { ShieldCheck, ShieldX } from 'lucide-react';
 import { useState } from 'react';
 import { fetchSources } from '../check/sourceClient.js';
 import { readTripStatusAsOutsider } from '../firebase/groupTrip.js';
@@ -31,31 +32,34 @@ export default function PrivacyLab() {
   const blocked = ATTEMPTS.filter((attempt) => outcomes[attempt.id] === attempt.expected).length;
 
   return (
-    <section className="card mb-4" aria-labelledby="lab-heading">
-      <div className="card-body">
-        <h3 className="h5" id="lab-heading">Try to break it</h3>
-        <p>Each attempt goes through the real code. Every one should be blocked.</p>
-        <button type="button" className="btn btn-danger mb-3" disabled={running} onClick={runAll}>
-          {running ? 'Running attempts…' : 'Try to break it'}
+    <section className="cs-panel" aria-labelledby="lab-heading">
+      <div>
+        <h2 className="cs-panel-title" id="lab-heading">Try to break it</h2>
+        <p className="cs-panel-lead">Each test tries to leak something through the real code. All of them should be blocked.</p>
+        <button type="button" className="btn btn-ink mb-3" disabled={running} onClick={runAll}>
+          {running ? 'Running the tests…' : 'Try to break it'}
         </button>
-        <ol className="mb-2" aria-live="polite">
+        <ol className="cs-list mb-2" aria-live="polite">
           {ATTEMPTS.map((attempt) => {
             const actual = outcomes[attempt.id];
             const passed = actual === attempt.expected;
             return (
-              <li key={attempt.id} className="mb-1">
-                {attempt.title}: expected <code>{attempt.expected}</code>
+              <li key={attempt.id}>
+                <div>
+                  <div>{attempt.title}</div>
+                  <div className="cs-mono cs-muted">expects {attempt.expected}{actual && actual !== attempt.expected ? ` · got ${actual}` : ''}</div>
+                </div>
                 {actual && (
-                  <span className={passed ? 'text-success' : 'text-danger'}>
-                    {' '}
-                    <span aria-hidden="true">{passed ? '✅' : '❌'}</span> {passed ? 'Blocked' : 'Not blocked'} (<code>{actual}</code>)
+                  <span className={`cs-verdict ${passed ? 'is-ok' : 'is-bad'}`}>
+                    {passed ? <ShieldCheck size={16} strokeWidth={1.5} aria-hidden="true" /> : <ShieldX size={16} strokeWidth={1.5} aria-hidden="true" />}
+                    {passed ? 'Blocked' : 'Not blocked'}
                   </span>
                 )}
               </li>
             );
           })}
         </ol>
-        {Object.keys(outcomes).length === ATTEMPTS.length && <p className="fw-semibold mb-0">{blocked}/{ATTEMPTS.length} blocked</p>}
+        {Object.keys(outcomes).length === ATTEMPTS.length && <p className="fw-medium mb-0 mt-3">{blocked} of {ATTEMPTS.length} blocked</p>}
       </div>
     </section>
   );

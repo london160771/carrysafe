@@ -31,7 +31,7 @@ export function createLabAttempts({ loadPhoto, fetchSources, fetchImpl, readOthe
     },
     {
       id: 'quote',
-      title: 'Model “quote” that is not on the official page',
+      title: 'An AI quote that is not on the official page',
       expected: 'quote_not_found',
       run: async () => {
         const { pages } = await fetchSources('JP');
@@ -42,7 +42,7 @@ export function createLabAttempts({ loadPhoto, fetchSources, fetchImpl, readOthe
     },
     {
       id: 'url',
-      title: 'Ask /api/source for an unlisted URL and country',
+      title: 'Ask the page fetcher for a site not on the list',
       expected: 'source_not_allowed',
       run: async () => {
         const codes = [];
@@ -57,7 +57,7 @@ export function createLabAttempts({ loadPhoto, fetchSources, fetchImpl, readOthe
     },
     {
       id: 'member',
-      title: 'Read another trip’s status as a non-member',
+      title: 'Read another family’s trip without being in it',
       expected: 'not_trip_member',
       run: async () => {
         try {

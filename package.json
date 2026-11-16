@@ -18,8 +18,11 @@
     "dev:emulators": "firebase emulators:exec --only firestore,auth --project demo-carrysafe \"vite --mode emulators\""
   },
   "dependencies": {
+    "@fontsource/instrument-sans": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
     "bootstrap": "5.3.9",
     "firebase": "13.3.0",
+    "lucide-react": "1.66.0",
     "react": "19.3.1",
     "react-dom": "19.3.1"
   },

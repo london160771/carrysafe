@@ -1,0 +1,96 @@
+html.cs-big-text {
+  font-size: 125%;
+}
+
+html.cs-high-contrast {
+  --cs-bg: #000;
+  --cs-surface: #000;
+  --cs-raised: #1a1a1a;
+  --cs-line: #fff;
+  --cs-line-strong: #fff;
+  --cs-text: #fff;
+  --cs-text-2: #f0f0f0;
+  --cs-text-3: #e6e6e6;
+  --cs-accent: #ffd400;
+  --cs-accent-hover: #ffe45c;
+  --cs-accent-soft: #333;
+  --cs-ok: #7dffb0;
+  --cs-ok-bg: #000;
+  --cs-warn: #ffd400;
+  --cs-warn-bg: #000;
+  --cs-bad: #ff8a80;
+  --cs-bad-bg: #000;
+  --cs-quiet-bg: #000;
+  --bs-body-bg: #000;
+  --bs-body-color: #fff;
+  --bs-link-color: #ffd400;
+  --bs-link-color-rgb: 255, 212, 0;
+  --bs-border-color: #fff;
+  --bs-secondary-color: #f0f0f0;
+}
+
+html.cs-high-contrast .cs-header {
+  background: #000;
+}
+
+html.cs-high-contrast .cs-hero::before {
+  background: rgb(0 0 0 / 88%);
+}
+
+html.cs-high-contrast .btn-primary {
+  --bs-btn-color: #000;
+  --bs-btn-hover-color: #000;
+  --bs-btn-active-color: #000;
+  --bs-btn-disabled-color: #000;
+}
+
+html.cs-high-contrast .btn-ink {
+  --bs-btn-bg: #fff;
+  --bs-btn-color: #000;
+  --bs-btn-hover-bg: #e6e6e6;
+  --bs-btn-hover-color: #000;
+}
+
+html.cs-high-contrast .cs-verdict,
+html.cs-high-contrast .cs-tag,
+html.cs-high-contrast .cs-notice {
+  border: 1px solid currentcolor;
+}
+
+html.cs-high-contrast .form-control,
+html.cs-high-contrast .form-select {
+  background-color: #000;
+  color: #fff;
+}
+
+html.cs-high-contrast .cs-doc {
+  background: #000;
+}
+
+.cs-officer {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  overflow-y: auto;
+  background: #000;
+  color: #fff;
+  padding: 24px;
+}
+
+.cs-officer h2,
+.cs-officer li {
+  font-size: clamp(1.4rem, 5vw, 2.6rem);
+  line-height: 1.35;
+}
+
+.cs-officer .cs-officer-en {
+  color: #ffd400;
+  font-size: clamp(1rem, 3.5vw, 1.6rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

@@ -24,18 +24,19 @@ export default function TypePanel({ onDraft }) {
 
   return (
     <section aria-labelledby="type-heading">
-      <h3 className="h5" id="type-heading">Type it</h3>
-      <label className="form-label" htmlFor="medicine-text">Ingredient or brand name</label>
-      <input id="medicine-text" className="form-control mb-2" value={text} onChange={(event) => setText(event.target.value)} autoComplete="off" />
+      <h2 className="cs-panel-title" id="type-heading">Type the name</h2>
+      <p className="cs-panel-lead">The ingredient, or the brand on the box.</p>
+      <label className="form-label" htmlFor="medicine-text">Medicine name</label>
+      <input id="medicine-text" className="form-control mb-3" value={text} onChange={(event) => setText(event.target.value)} autoComplete="off" />
       <div className="d-flex flex-wrap gap-2">
         <button type="button" className="btn btn-primary" disabled={!value} onClick={() => onDraft(createDraft({ source: 'typed', ingredients: [value] }))}>
-          Use as ingredient
+          Add it
         </button>
-        <button type="button" className="btn btn-outline-primary" disabled={!value || busy} onClick={suggest}>
-          {busy ? 'Asking the cloud…' : 'It’s a brand: suggest ingredients'}
+        <button type="button" className="btn btn-secondary-soft" disabled={!value || busy} onClick={suggest}>
+          {busy ? 'Looking it up…' : 'It’s a brand: find the ingredients'}
         </button>
       </div>
-      <p className="small text-body-secondary mt-2 mb-0">Brand suggestions send only the brand name to the cloud.</p>
+      <p className="cs-small cs-muted mt-3 mb-0">For a brand, only the brand name is sent.</p>
       <ErrorNotice error={error} />
     </section>
   );
