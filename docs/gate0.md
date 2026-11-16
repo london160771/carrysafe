@@ -5,12 +5,28 @@ Raw results only. PASS/FAIL is recorded when a step has actually been run. Pendi
 | Step | What | Status | Where it runs |
 |---|---|---|---|
 | 0 | Nano downloaded and answers text | PASS (2026-11-14) | Adesope's laptop |
-| 1 | Image → JSON on 3 real photos + 2 generated labels, with timings | PENDING | Adesope's laptop, `/gate0.html` button 1 |
-| 2 | Framing Coach hint on `broncholyte-front.jpg` (cut off on the right) | PENDING | Adesope's laptop, `/gate0.html` button 1 |
+| 1 | Image → JSON on 3 real photos + 2 generated labels, with timings | PASS on device, 16–24 s each; 3 of 5 fully right (2026-11-16, see below) | Adesope's laptop, `/gate0.html` button 1 |
+| 2 | Framing Coach hint on `broncholyte-front.jpg` (cut off on the right) | FAIL: ran on device (44.8 s) but said "Readable" (2026-11-16) | Adesope's laptop, `/gate0.html` button 1 |
 | 3 | `/api/source` fetches official pages for all 6 countries | PASS from dev container (2026-11-15); Vercel run PENDING | Container done; Vercel needs the deploy |
 | 4 | Verdict + quote + `verifyQuote` for 3 seed checks | PASS for the checks the pages support (2026-11-16, see below) | Headless Chromium, dev container |
 | 5 | Free-tier cloud model JSON under App Check (debug token) | PASS with `gemini-3.5-flash-lite` (2026-11-16) | Headless Chromium, dev container |
 | 6 | `speechSynthesis` ja-JP voice + `SpeechRecognition` in Chrome | PENDING | Adesope's laptop, `/gate0.html` button 4 |
+
+## Steps 1 and 2: on-device label reading (2026-11-16, Adesope's laptop, Chrome 157, Windows)
+
+Every call reported `inferenceSource: "on_device"`. Availability: `available`.
+
+| Sample | Truth (`samples/README.md`) | Nano read | ms | Result |
+|---|---|---|---|---|
+| broncholyte-front | Broncholyte · bromhexine hydrochloride · 4 mg/5 ml · cut off on the right | brand broncholyte; ingredients bromhexine hydrochloride, **mucolytic**; 4mg/5ml | 23731 | Ingredient right; added a drug class as an ingredient |
+| broncholyte-back-fr | Chlorhydrate de Bromhexine 4 mg / 5 ml (French) | ingredients **chlorhydrate de bromhexane**; 4mg; 5ml | 16434 | Misspelt and not translated to English |
+| orphesic-blister | orphenadrine citrate 35 mg + paracetamol 450 mg | brand orphasic; ingredients paracetamol only; 0.5g; 30 tablets | 17862 | **Missed orphenadrine**; strength wrong |
+| pseudoephedrine-sample | pseudoephedrine hydrochloride 60 mg · 24 tablets | exact | 21571 | Right |
+| methylphenidate-sample | methylphenidate hydrochloride 10 mg · 30 tablets | exact | 18384 | Right |
+
+Framing Coach on broncholyte-front: `{"readable": true, "hint": "Readable"}` in 44764 ms. Wrong: the label is cut off on the right.
+
+What this means: the confirm step (the user checks and edits the ingredients before anything is sent) is required, not optional. Extraction prompt tightened after this run (list every active ingredient, no drug classes, English names); re-run pending.
 
 ## Step 3: official page fetch (2026-11-15, dev container, Node 22, real network)
 
