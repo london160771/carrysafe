@@ -26,7 +26,19 @@ Every call reported `inferenceSource: "on_device"`. Availability: `available`.
 
 Framing Coach on broncholyte-front: `{"readable": true, "hint": "Readable"}` in 44764 ms. Wrong: the label is cut off on the right.
 
-What this means: the confirm step (the user checks and edits the ingredients before anything is sent) is required, not optional. Extraction prompt tightened after this run (list every active ingredient, no drug classes, English names); re-run pending.
+What this means: the confirm step (the user checks and edits the ingredients before anything is sent) is required, not optional. Extraction prompt tightened after this run (list every active ingredient, no drug classes, English names).
+
+**Re-run with the tightened prompt (2026-11-16 16:36 UTC, same laptop, all `on_device`):**
+
+| Sample | Nano read | ms | Change |
+|---|---|---|---|
+| broncholyte-front | bromhexine hydrochloride; 4mg; "each 1 teaspoon" | 23179 | Drug class gone; strength lost "/5 ml" |
+| broncholyte-back-fr | chlorohydrate de bromhexine, **paracetamol**; quantity "4mg" | 15409 | Still French; **invented paracetamol** (the prompt's example word) |
+| orphesic-blister | paracetamol only; no strength | 16583 | Still missed orphenadrine |
+| pseudoephedrine-sample | exact | 14625 | Same |
+| methylphenidate-sample | exact | 14530 | Same |
+
+Framing Coach: "Readable" again (49081 ms). The example ingredient names were removed from the prompt because Nano copied one. Conclusion: on this "Low" class laptop, Nano reads clean labels well and busy real packs poorly; the confirm step stays the safeguard. No more prompt tuning planned.
 
 ## Step 3: official page fetch (2026-11-15, dev container, Node 22, real network)
 

@@ -12,7 +12,7 @@ If everything is readable, use {"readable": true, "hint": "Readable"}.`;
 export const EXTRACT_PROMPT = `Read this medicine label. Copy only what is printed.
 Reply with JSON only:
 {"brand": string or null, "ingredients": [generic active ingredient names in English, lower case], "strength": string or null, "quantity": string or null}
-List every active ingredient. Combination products have more than one, for example "codeine phosphate" and "paracetamol".
+List every active ingredient printed on the label, and only those.
 Never list a drug class or use such as "antibiotic" or "cough relief".
 Write ingredient names in English even if the label is in another language.
 Do not include any person's name, doctor, pharmacy, address, batch or registration number.`;
