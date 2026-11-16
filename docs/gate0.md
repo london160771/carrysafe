@@ -10,7 +10,7 @@ Raw results only. PASS/FAIL is recorded when a step has actually been run. Pendi
 | 3 | `/api/source` fetches official pages for all 6 countries | PASS from dev container (2026-11-15); Vercel run PENDING | Container done; Vercel needs the deploy |
 | 4 | Verdict + quote + `verifyQuote` for 3 seed checks | PASS for the checks the pages support (2026-11-16, see below) | Headless Chromium, dev container |
 | 5 | Free-tier cloud model JSON under App Check (debug token) | PASS with `gemini-3.5-flash-lite` (2026-11-16) | Headless Chromium, dev container |
-| 6 | `speechSynthesis` ja-JP voice + `SpeechRecognition` in Chrome | PENDING | Adesope's laptop, `/gate0.html` button 4 |
+| 6 | `speechSynthesis` ja-JP voice + `SpeechRecognition` in Chrome | PASS (2026-11-16): 22 voices incl. "Google 日本語 (ja-JP)"; SpeechRecognition present | Adesope's laptop, `/gate0.html` button 4 |
 
 ## Steps 1 and 2: on-device label reading (2026-11-16, Adesope's laptop, Chrome 157, Windows)
 
