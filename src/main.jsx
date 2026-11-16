@@ -10,13 +10,17 @@ import './app/layout.css';
 import './app/parts.css';
 import './app/screens.css';
 import './app/access.css';
+import './app/print.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './app/App.jsx';
 import { pathFromOldHash } from './app/routes.js';
+import { registerServiceWorker } from './pwa/registerServiceWorker.js';
 
 const oldHashPath = pathFromOldHash(window.location.hash);
 if (oldHashPath) window.history.replaceState(null, '', oldHashPath);
+
+registerServiceWorker();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

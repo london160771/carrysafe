@@ -38,7 +38,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 - **Act 1: How it's done today.** Amaka flies Lagos → Dubai → Tokyo with her mum, who has poor eyesight. Amaka carries prescribed ADHD tablets (methylphenidate). Mum carries a cold medicine with pseudoephedrine. The UAE wants documents for ADHD medicine. Japan prohibits pseudoephedrine. Nobody told them.
 - **Act 2: The new way.** Mum scans her box. The Framing Coach speaks: "Move left, the label is cut off." The badge shows **Read on this device · free · private**.
 - **Act 3: The real check.** Every stop is checked, including Dubai. The badge shows **Checked in cloud**. The result is Japan ⛔ with **"Quote found on official page ✓"** and the government link.
-- **Act 4: The proof.** The "What left your laptop" panel shows `pseudoephedrine · Japan`: no name, no photo. A privacy-lab attempt to send mum's name is blocked live (§18).
+- **Act 4: The proof.** The "What left this device" panel shows `pseudoephedrine · Japan`: no name, no photo. A privacy-lab attempt to send mum's name is blocked live (§18).
 - **Act 5: Control stays with the traveller.** The group sees "Mum ⛔ Japan", not mum's medicine. At the border, mum shows a Japanese Border Card that reads itself aloud.
 - **Close.** "Travellers already have rule databases and embassy pages. What they lacked was a private way to check their own medicine against every stop, and to prove it at the border. Carry Safe is that."
 
@@ -126,7 +126,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 1. **Fail closed.** Unknown, unquoted or unfetched means ⚠ "not confirmed", never ✅.
 2. **Real over mocked.** Anything mocked or saved is labelled (§17).
 3. **Quote or it didn't happen.** Every verdict shows the exact official sentence and its link.
-4. **Privacy you can see.** The "What left your laptop" panel shows every outgoing request.
+4. **Privacy you can see.** The "What left this device" panel shows every outgoing request.
 5. **AI reads; code decides.** Quote checks, quantity maths, status grids and the allow-list are plain code.
 6. **Accessible by default.** Icon + word, keyboard, screen reader, read-aloud.
 
@@ -143,7 +143,7 @@ The character is illustrative; the rules are real and must be confirmed against 
    - code picks the paragraphs that mention the ingredient or its synonyms;
    - the free cloud model returns a verdict plus a quote;
    - code verifies the quote is on the page.
-5. See verdicts per stop with quote + link + "checked on" date; see the "What left your laptop" panel.
+5. See verdicts per stop with quote + link + "checked on" date; see the "What left this device" panel.
 6. Invite others (group mode); everyone sees only the status grid.
 7. Open the Border Card → Show the Officer → read aloud in Japanese.
 
@@ -188,16 +188,19 @@ The character is illustrative; the rules are real and must be confirmed against 
 | FR-CHECK-004 | P0 | Saved backup table `fallback-verdicts.json` | Used only when the fetch fails; labelled "saved copy from [date]" |
 | FR-CHECK-005 | P0 | Uncovered country | ⚠ "not covered yet" + embassy link |
 | FR-PRIV-001 | P0 | Request guard `buildCloudRequest()` | Rejects non-allow-listed fields (`field_not_allowed`) and images (`image_not_allowed`) |
-| FR-PRIV-002 | P0 | "What left your laptop" panel | Shows the exact payload of every outgoing request (AI + fetch) this session |
+| FR-PRIV-002 | P0 | "What left this device" panel | Shows the exact payload of every outgoing request (AI + fetch) this session |
 | FR-PRIV-003 | P0 | "Ran on" badges from the SDK's real inference source | Never hard-coded |
 | FR-GRP-001 | P0 | Group trip: invite link, members, status grid | Members see status only; med lists stay on each device |
 | FR-CARD-001 | P0 | Border Card: generic names + quantities, English + Japanese | Translation request holds no name; the name is added on the device |
 | FR-CARD-002 | P0 | Show the Officer mode | Full-screen high contrast; "Read aloud in Japanese" uses a ja-JP voice |
+| FR-CARD-003 | P0 | Send the card to a phone | Laptop shows a QR code; the card travels in the link fragment (`/card#c=…`), which browsers never send to a server; the phone saves it on the device |
+| FR-CARD-004 | P0 | Print or save the card as PDF | Print view shows only the card |
+| FR-PWA-001 | P0 | Installable web app (PWA) | Manifest + service worker; "Install app" when the browser offers it; the app shell and saved card open with no network. Not a native Android/iOS app |
 | FR-VOICE-001 | P0 | Add meds by voice | Speech becomes a medicine entry; the UI says speech may use Google servers |
 | FR-A11Y-001 | P0 | Accessibility basics (§12) | Keyboard-only and screen-reader checks pass; status uses icon + word |
 | FR-QTY-001 | P1 | Quantity check vs a quoted limit | Code computes the supply; shows the limit's quote |
 | FR-RECHK-001 | P1 | Rule-change re-check before departure | Re-fetches; hash changed → re-check → alert members whose verdict changed |
-| FR-OFF-001 | P1 | Offline Border Card | Opens with no network after the first load |
+| FR-OFF-001 | P0 | Offline Border Card (moved from P1, 2026-11-16) | Opens with no network after the first load |
 | FR-JDG-001 (H) | P0 | Judge Mode, no signup | `/judge` opens the seeded "Amaka-Tokyo" trip in one click |
 
 ---
@@ -233,6 +236,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 | `country_not_covered` | Country not in the registry | no | Embassy link |
 | `cloud_unavailable` | AI Logic / network / App Check / free-tier limit | yes | Retry; cached verdict shown if present |
 | `not_trip_member` | Reading a trip you're not in | no | Ask for an invite |
+| `card_link_invalid` | A card link or QR code that is damaged or from another app | no | Make the card again and scan the new code |
 
 ---
 
@@ -399,6 +403,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Japan + pseudoephedrine: let the verified quote decide; keep both official pages (MHLW NCD + UK FCDO). The demo may show ⚠ needs documents instead of ⛔ | Adesope's choice on the decision card |
 | 2026-11-16 | Cloud model = `gemini-3.5-flash-lite` | `gemini-2.5-flash` returns 404 for new projects; `gemini-3.8-flash` gave no response in 170 s; flash-lite answered in 1.3 s (`docs/gate0.md`) |
 | 2026-11-16 | UI redesign (Adesope): warm light theme, Instrument Sans/Serif + lucide icons self-hosted (no new outbound calls), plain-language copy, stock photos from Pexels stored in `public/photos/` and labelled as illustrations. Screens use real paths (`/`, `/add`, `/results`, `/privacy`, `/card`, `/judge`, `/join/:id`); old `/#/` links redirect | Adesope's request; same 6 screens (§21) |
+| 2026-11-16 | Phone batch (Adesope): PWA install + offline card (FR-OFF-001 moved to P0), send card to phone by QR with the data in the URL fragment (nothing uploaded), print/save as PDF, "What left your laptop" renamed "What left this device". Scanning stays laptop-only (Nano is desktop Chrome only) | Adesope: officers won't be handed a laptop; app should be usable on phones |
 
 ---
 
@@ -470,11 +475,13 @@ Real requests through the real code, each blocked live:
 1. **Trip:** route builder + status grid.
 2. **Add medicine:** Scan (Framing Coach), Type, Speak; confirm ingredients.
 3. **Results:** per medicine × stop: ✅/⚠/⛔ + conditions + official quote + link + "Ran on" badge + date.
-4. **What left your laptop** (`/privacy`): the outgoing payload log + the lab buttons.
-5. **Border Card / Show the Officer:** English + Japanese; full-screen; read aloud.
+4. **What left this device** (`/privacy`): the outgoing payload log + the lab buttons.
+5. **Border Card / Show the Officer:** English + Japanese; full-screen; read aloud; send to phone by QR; print.
 6. **Judge Mode `/judge`** (H): seeded trip, "Run the demo trip", "Try to break it", the 60-second path.
 
-Persistent bar: big text, high contrast, read-aloud speed.
+Persistent bar: big text, high contrast, read-aloud speed, and "Install app" when the browser offers it.
+
+**Phones:** every screen works in phone Chrome except scanning. The on-device model runs only in desktop Chrome, and photos never go to the cloud (INV-2), so phones type or say the name. The intended split: scan and check on the laptop, carry the card on the phone.
 
 ---
 
@@ -487,7 +494,7 @@ Persistent bar: big text, high contrast, read-aloud speed.
 | 1:05–1:40 | Check every stop | JP ⛔ + "Quote found on official page ✓"; AE ⚠ | "Every stop, even the layover, checked against the government's own words." |
 | 1:40–2:05 | Proof | Panel: `pseudoephedrine · Japan`; leak attempt blocked | "Only the ingredient left the laptop." |
 | 2:05–2:30 | Group | "Mum ⛔ Japan" grid | "Amaka sees the risk, not mum's medicine." |
-| 2:30–2:50 | Officer | Japanese card read aloud | "Your medicine. Your secret. Your trip, safe." |
+| 2:30–2:50 | Officer | Laptop shows a QR code; the phone opens the card full screen and reads it aloud in Japanese | "Your medicine. Your secret. Your trip, safe." |
 
 Record each act the moment it works. The real check is shown uncut.
 
@@ -502,8 +509,8 @@ Record each act the moment it works. The real check is shown uncut.
 **60-second judge path (README):**
 1. Open `/judge` → **Run the demo trip**.
 2. **Results** → Japan ⛔ with "Quote found on official page ✓".
-3. **What left your laptop** → **Try to break it**.
-4. **Border Card** → **Show the Officer** → **Read aloud in Japanese**.
+3. **What left this device** → **Try to break it**.
+4. **Border Card** → **Show the Officer** → **Read aloud in Japanese** (or scan the QR code with a phone).
 
 ---
 
@@ -541,9 +548,9 @@ Record each act the moment it works. The real check is shown uncut.
 **P0 (must ship):**
 - FR-SCAN-001..005, FR-ROUTE-001, FR-SRC-001..003
 - FR-CHECK-001..005, FR-PRIV-001..003, FR-GRP-001
-- FR-CARD-001..002, FR-VOICE-001, FR-A11Y-001, FR-JDG-001
+- FR-CARD-001..004, FR-OFF-001, FR-PWA-001, FR-VOICE-001, FR-A11Y-001, FR-JDG-001
 
-**P1 (only after P0 is deployed AND recorded):** FR-QTY-001 → FR-RECHK-001 → FR-OFF-001.
+**P1 (only after P0 is deployed AND recorded):** FR-QTY-001 → FR-RECHK-001.
 
 **Never in this build (→ ROADMAP.md):**
 - Google Search grounding
@@ -593,7 +600,7 @@ Phases run back-to-back (CLAUDE.md §10). Each phase ends with verification and 
 
 ### Phase 3: Proof + group (Nov 21)
 - **Goal:** visible privacy and multi-user.
-- **Scope:** "What left your laptop" panel, lab (§18), group trip, Firestore rules + emulator tests.
+- **Scope:** "What left this device" panel, lab (§18), group trip, Firestore rules + emulator tests.
 - **Acceptance:** FR-PRIV-002, FR-GRP-001; lab 5/5.
 - **Record:** Acts 4 + group.
 
@@ -677,7 +684,7 @@ After the internal cutoff: fixes only. After the deadline: demo stays live, no f
 | Current functionality | only what passed §30 |
 | Future | ROADMAP.md + §32 |
 | Repo / Live / Video | [links] |
-| Screenshots | JP ⛔ with verified quote; "What left your laptop"; group grid; Japanese Border Card |
+| Screenshots | JP ⛔ with verified quote; "What left this device"; group grid; Japanese Border Card |
 | Platform | Web (Chrome) |
 
 ---

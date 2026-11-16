@@ -27,5 +27,6 @@ export function createIdbKv() {
   return {
     get: (key) => run('readonly', (store) => store.get(key)),
     set: (key, value) => run('readwrite', (store) => store.put(value, key)).then(() => undefined),
+    delete: (key) => run('readwrite', (store) => store.delete(key)).then(() => undefined),
   };
 }

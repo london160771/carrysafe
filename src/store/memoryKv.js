@@ -5,5 +5,8 @@ export function createMemoryKv() {
     set: async (key, value) => {
       data.set(key, structuredClone(value));
     },
+    delete: async (key) => {
+      data.delete(key);
+    },
   };
 }

@@ -207,3 +207,11 @@
     padding: 20px;
   }
 }
+
+.cs-qr {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  border: 1px solid var(--cs-line);
+  border-radius: var(--cs-radius);
+}

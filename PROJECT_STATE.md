@@ -3,16 +3,16 @@
 > Where the project actually stands. A progress log, not requirements (those live in `PRD.md`).
 > Update at the end of every phase. Only write what was verified. If this file and the repo disagree, the repo wins.
 
-**Last updated:** 2026-11-15 16:35 WAT · **By:** Claude Code · **Commit:** see git log (`feat: phase 0 foundation`)
+**Last updated:** 2026-11-16 · **By:** Claude Code · **Commit:** see git log (`feat: phone batch`)
 
 ---
 
 ## 1. Right now
 
-- **Active phase:** Phase 4 code done. P0 code is complete; Phase 5 (P1) waits until P0 is deployed and recorded (PRD §26). Real cloud runs wait on the Firebase web config + App Check debug token.
+- **Active phase:** P0 live on Vercel; UI redesign and phone batch (QR card to phone, print/PDF, install + offline card) done. Phase 5 (P1) waits until P0 is recorded (PRD §26).
 - **Status:** Scaffold, Firebase init, `/api/source` (real HTML fetch, allow-list, timeout, size cap), `sources.json` (6 countries, 8 pages), Gate 0 harness (`/gate0.html`), generated sample labels. `npm run verify` passes.
-- **Next step:** Adesope: Firebase web config in `.env.local` + Vercel, App Check debug token, Vercel team access, run `/gate0.html` on the demo laptop. Decision on Japan pseudoephedrine category (see `docs/gate0.md`).
-- **Blocked by:** Firebase web config + debug token (Gate 0 step 5); Vercel access (deploy); demo laptop (steps 1, 2, 6).
+- **Next step:** merge the phone batch to `main`; Adesope runs `/gate0.html` steps 1, 2, 6 on the demo laptop and tests install + QR on a real phone; App Check for judges' browsers; recordings.
+- **Blocked by:** demo laptop and a real phone (Adesope).
 
 ## 2. Phase tracker
 
@@ -30,9 +30,10 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 33 files / 142 tests, build OK | 2026-11-16 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 35 files / 150 tests, build OK | 2026-11-16 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
 | UI at 390px | Playwright on all 6 pages + `/join/:id` + old `/#/panel` link | no horizontal scroll (scrollWidth 390); old hash link lands on `/privacy` | 2026-11-16 |
+| Phone card + offline | Playwright: laptop makes card (live cloud translation), QR decoded with jsQR back to the link, Pixel 7 imports it, server stopped, `/card`, `/`, `/privacy` still open | PASS (emulated phone, not a real device) | 2026-11-16 |
 | Seed "Amaka-Tokyo" | manual | — | — |
 
 ## 4. What works (verified)
@@ -49,8 +50,8 @@
 
 | Item | Value |
 |---|---|
-| Live URL (Vercel) | [ ] |
-| Judge Mode | [ ] |
+| Live URL (Vercel) | https://carrysafe-rho.vercel.app |
+| Judge Mode | https://carrysafe-rho.vercel.app/judge |
 | Firebase project | `carry-safe-30940` (Spark) |
 | Repo | https://github.com/london160771/carrysafe |
 | App Check | Unregistered (reCAPTCHA Enterprise key attempt pending; fallback: debug token) |
@@ -82,6 +83,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Phone batch: border card sent to a phone by QR (data in the link fragment, nothing uploaded), print / save as PDF, installable PWA with offline card, "What left this device" rename. Offline bug fixed: assets carry `Vary: Origin`, so the service worker matches with `ignoreVary`. Verify: lint clean, 35 files / 150 tests, build OK. Report: `docs/phase-reports/phone-batch.md`.
 
 - **2026-11-16** — Live on Vercel at https://carrysafe-rho.vercel.app (from `main` e3987ae; `/`, `/judge`, `/gate0.html` 200; `/api/source?country=SG` returns the HSA page; bad country and extra params rejected with `source_not_allowed`). UI redesign: warm light theme, self-hosted fonts and icons, plain wording, Pexels photos (`public/photos/CREDITS.md`), real paths instead of `/#/` (old links redirect). Verify: lint clean, 33 files / 142 tests, build OK. Report: `docs/phase-reports/ui-redesign.md`.
 

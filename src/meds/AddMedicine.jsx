@@ -16,7 +16,7 @@ const MODES = [
 const PHOTO = { src: '/photos/travel-medicine-kit.webp', alt: 'An open travel pouch with a pill bottle and blister packs' };
 
 export default function AddMedicine({ meds, saveMed, removeMed }) {
-  const [mode, setMode] = useState('scan');
+  const [mode, setMode] = useState(() => ('LanguageModel' in globalThis ? 'scan' : 'type'));
   const [pending, setPending] = useState(null);
 
   async function confirm(med) {

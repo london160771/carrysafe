@@ -104,6 +104,7 @@ Check installed versions first.
 - **Cloud model (2026-11-16):** `gemini-2.5-flash` is closed to new projects (404); `gemini-3.8-flash` hung > 170 s; use `gemini-3.5-flash-lite` (`src/ai/models.js`).
 - **Routing (2026-11-16):** real paths, not `/#/` (`src/app/routes.js`, `navigation.js`, `Link.jsx`). `vercel.json` rewrites every non-`/api/` path to `index.html`; files like `/gate0.html` and `/photos/*` are served first. Old `/#/x` links are redirected in `main.jsx`.
 - **No CDN fonts or images:** fonts come from `@fontsource`, icons from `lucide-react`, photos from `public/photos/` (PRD §14 lists the only outbound calls).
+- **PWA (2026-11-16):** `sw.js` is generated at build time by `src/pwa/serviceWorkerPlugin.js` (precache list + version); it registers only in production builds, never in `npm run dev`. It skips `/api/` and other origins. Test offline with `npm run build && npm run preview`, then stop the server (Playwright `setOffline` alone is not enough proof). Assets are served with `Vary: Origin`, so cache lookups use `ignoreVary: true`.
 - [Add breaking changes here as you find them.]
 
 ## 9. Code quality

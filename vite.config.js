@@ -2,9 +2,10 @@ import { resolve } from 'node:path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import { localApiPlugin } from './api/_lib/viteApiPlugin.js';
+import { serviceWorkerPlugin } from './src/pwa/serviceWorkerPlugin.js';
 
 export default defineConfig({
-  plugins: [react(), localApiPlugin()],
+  plugins: [react(), localApiPlugin(), serviceWorkerPlugin()],
   build: {
     rollupOptions: {
       input: {

@@ -14,6 +14,8 @@ Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: clou
 | Saved backup verdicts | Real quotes saved earlier, used only if a fetch fails | "Saved copy from [date]" label |
 | Seeded "Amaka-Tokyo" trip | Sample data, real checks | `DEMO TRIP` label |
 | Sample medicine photos in Judge Mode | Sample images | "Sample photo" caption |
+| Border card to phone (QR) | Real: the card is compressed into the link fragment, never uploaded | `src/card/cardTransfer.test.js` |
+| Install + offline card (PWA) | Real service worker; offline open checked in an emulated phone (Playwright, server stopped); not yet on a real phone | `src/pwa/precache.test.js`; `docs/phase-reports/phone-batch.md` |
 | Travel and family photos on the pages | Stock photos from Pexels (free licence), illustrations only, not real users | Footer: "Photos from Pexels, used as illustrations"; list in `public/photos/CREDITS.md` |
 
 **Not used:** Google Search grounding (paid-only; billing unavailable). See ROADMAP.

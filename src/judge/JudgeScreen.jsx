@@ -11,8 +11,8 @@ const PHOTO = { src: '/photos/mother-and-daughter-packing.webp', alt: 'A mother 
 
 const TOUR = [
   { to: '/results', text: 'Results: Japan, with “Quote found on official page ✓”' },
-  { to: '/privacy', text: 'What left your laptop, then Try to break it' },
-  { to: '/card', text: 'Border card, then Show the Officer, then Read aloud in Japanese' },
+  { to: '/privacy', text: 'What left this device, then Try to break it' },
+  { to: '/card', text: 'Border card, then Show the Officer, then Read aloud in Japanese. Or scan the code with your phone' },
 ];
 
 export default function JudgeScreen({ medStore, trip }) {

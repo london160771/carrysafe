@@ -7,7 +7,7 @@ export default function PanelScreen() {
     <div className="container cs-page">
       <PageHeader
         id="panel-heading"
-        title="What left your laptop"
+        title="What left this device"
         lead="Every message this app sent, exactly as it was sent. Your name, photos and medicine list are never here, because they never leave."
       />
       <div className="cs-grid-2">

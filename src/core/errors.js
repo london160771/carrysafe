@@ -9,6 +9,7 @@ export const ERROR_CODES = Object.freeze({
   country_not_covered: { retryable: false, nextAction: 'Embassy link' },
   cloud_unavailable: { retryable: true, nextAction: 'Retry; cached verdict shown if present' },
   not_trip_member: { retryable: false, nextAction: 'Ask for an invite' },
+  card_link_invalid: { retryable: false, nextAction: 'Make the card again and scan the new code' },
   config_missing: { retryable: false, nextAction: 'Add the Firebase web config to .env.local' },
 });
 

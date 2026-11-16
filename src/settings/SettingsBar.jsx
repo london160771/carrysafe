@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import InstallButton from '../pwa/InstallButton.jsx';
 import { SPEECH_RATE_RANGE, updateSettings } from './settingsStore.js';
 import { useSettings } from './useSettings.js';
 
@@ -36,6 +37,7 @@ export default function SettingsBar() {
           />
           <output htmlFor="speech-rate" className="cs-mono">{settings.speechRate.toFixed(1)}×</output>
         </div>
+        <InstallButton />
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ export const SCREENS = Object.freeze([
   { id: 'trip', path: '/', label: 'Trip' },
   { id: 'add', path: '/add', label: 'Medicines' },
   { id: 'results', path: '/results', label: 'Results' },
-  { id: 'privacy', path: '/privacy', label: 'What left your laptop' },
+  { id: 'privacy', path: '/privacy', label: 'What left this device' },
   { id: 'card', path: '/card', label: 'Border card' },
   { id: 'judge', path: '/judge', label: 'Demo' },
 ]);
