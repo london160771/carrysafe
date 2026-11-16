@@ -4,7 +4,7 @@
 
 Carry Safe checks whether your medicine is legal at every stop on your trip, including layovers. Your laptop reads the label privately, and only the ingredient name goes out to be checked against official government pages, with the exact quote verified.
 
-[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](#) · Tests: 153 unit + 7 rules passing (2026-11-16)
+[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](https://youtu.be/NgtxMAC0nq4) · Tests: 153 unit + 7 rules passing (2026-11-16)
 
 > Built for #BuildHybridAI 2026 (Google Firebase) with Firebase AI Logic hybrid inference.
 
