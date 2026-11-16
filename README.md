@@ -44,7 +44,7 @@ Hosting: Vercel (app + `/api/source`, which fetches only listed official pages).
 See PRD §13.
 
 ## Tested, not claimed
-As of 2026-11-16, `npm run verify` passes with 35 test files and 150 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator (last run 2026-11-15; rules unchanged since). Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
+As of 2026-11-16, `npm run verify` passes with 35 test files and 152 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator (last run 2026-11-15; rules unchanged since). Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
 
 Verified live (2026-11-16): cloud verdicts with verified quotes, the shared rule cache, group trips and the lab. Not yet verified live: on-device Nano reading and the Japanese voice, which need the demo laptop. See `docs/gate0.md`.
 
