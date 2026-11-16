@@ -79,6 +79,7 @@ html.cs-high-contrast .cs-doc {
 
 .cs-officer h2,
 .cs-officer li {
+  color: #fff;
   font-size: clamp(1.4rem, 5vw, 2.6rem);
   line-height: 1.35;
 }
