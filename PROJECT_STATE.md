@@ -73,7 +73,7 @@
 - Greece has no fetchable Greek government page with traveller rules; UK FCDO Greece is used.
 - Paracetamol is not named on the JP pages, so a JP ✅ can't be quote-verified yet (INV-3 → ⚠).
 - Cloud model is `gemini-3.5-flash-lite` (Gate 0 step 5 passed 2026-11-16).
-- Firestore rules not deployed yet, so rule-cache and group writes fail on the real project.
+- Firestore rules published by Adesope 2026-11-16; rule cache, group trip and lab 5/5 verified live.
 
 ## 9. Handoff notes
 
@@ -82,6 +82,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Rules published; live rule cache (2nd run 4.1 s from cache), live group trip (Mum's status seen by Amaka), live lab 5/5.
 
 - **2026-11-16** — Firebase config added locally; Anonymous Auth, Firestore DB and App Check debug token set up by Adesope. Live seed run: 3 verified verdicts (AE methylphenidate needs documents, AE paracetamol allowed, JP pseudoephedrine needs documents); saved to fallback table. Model switched to gemini-3.5-flash-lite. Unverified conditions now hidden on the card.
 

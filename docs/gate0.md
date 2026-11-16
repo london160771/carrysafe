@@ -87,3 +87,10 @@ Before the token was registered: 401 "Firebase App Check token is invalid" (enfo
 The 3 verified quotes are saved in `src/data/fallback-verdicts.json` (savedOn 2026-11-16) with the page line they came from.
 The paracetamol × AE ✅ rests on the model treating paracetamol as over-the-counter; the quote itself does not name paracetamol.
 Rule cache writes failed: Firestore rules not deployed yet (default production rules deny).
+
+## Live Firestore (2026-11-16, after Adesope published `firestore.rules`)
+
+- Rule cache: the demo trip ran in 10.3 s the first time and 4.1 s the second time. On the second run, the 3 verified verdicts came from `rules/{ingredient_country}` labelled "Shared rule cache", with each quote re-verified against the freshly fetched page.
+- The model varies between runs: on the second run, methylphenidate × JP came back as ⚠ Needs documents with a verified quote, where the first run gave `quote_not_found`. Both results are fail-closed.
+- Group trip, using two separate browser contexts on the real project: Amaka created the trip, and Mum ran the demo trip, joined by link and shared her status. Amaka saw "Mum ⚠ Needs documents" for both the UAE and Japan, and no medicine names. Both members then left the group.
+- Lab against the real project: **5/5 blocked**. Attempt 5 got a real `permission-denied` from Firestore, which maps to `not_trip_member`.
