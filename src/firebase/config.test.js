@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { readAppCheckProvider, readFirebaseConfig } from './config.js';
+import { readAppCheckSiteKey, readFirebaseConfig } from './config.js';
 
 const FULL_ENV = {
   VITE_FIREBASE_API_KEY: 'key',
@@ -25,11 +25,7 @@ describe('readFirebaseConfig', () => {
   });
 
   it('returns null when no App Check site key is set', () => {
-    expect(readAppCheckProvider({})).toBeNull();
-  });
-
-  it('prefers reCAPTCHA v3 over Enterprise when both keys are set', () => {
-    expect(readAppCheckProvider({ VITE_APPCHECK_SITE_KEY: 'e' })).toEqual({ kind: 'recaptcha-enterprise', siteKey: 'e' });
-    expect(readAppCheckProvider({ VITE_APPCHECK_SITE_KEY: 'e', VITE_RECAPTCHA_SITE_KEY: 'v' })).toEqual({ kind: 'recaptcha-v3', siteKey: 'v' });
+    expect(readAppCheckSiteKey({})).toBeNull();
+    expect(readAppCheckSiteKey({ VITE_APPCHECK_SITE_KEY: 'k' })).toBe('k');
   });
 });

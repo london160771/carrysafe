@@ -22,8 +22,6 @@ export function readFirebaseConfig(env) {
   return config;
 }
 
-export function readAppCheckProvider(env) {
-  if (env.VITE_RECAPTCHA_SITE_KEY) return { kind: 'recaptcha-v3', siteKey: env.VITE_RECAPTCHA_SITE_KEY };
-  if (env.VITE_APPCHECK_SITE_KEY) return { kind: 'recaptcha-enterprise', siteKey: env.VITE_APPCHECK_SITE_KEY };
-  return null;
+export function readAppCheckSiteKey(env) {
+  return env.VITE_APPCHECK_SITE_KEY || null;
 }

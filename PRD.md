@@ -245,7 +245,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 
 - **Privacy:** INV-1, INV-2, INV-4, INV-7. Firebase web config is public by design; no other secrets in the client.
 - **Security:**
-  - App Check is required by AI Logic: reCAPTCHA v3 (free, no billing) so any browser works; reCAPTCHA Enterprise is also supported; a debug token is the local fallback.
+  - App Check is required by AI Logic: Fraud Defense (reCAPTCHA Enterprise), registered with no billing, so any browser works; a debug token is the local fallback.
   - Firestore rules: members-only reads; members write only their own status.
   - `/api/source` is fetch-only, uses the allow-list, has a timeout and a size cap, and needs no secrets.
 - **Cost:** Firebase Spark + Gemini Developer API free tier + Vercel Hobby. No billing.
@@ -393,7 +393,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Countries covered = JP, AE, SG, GR, GB, US | Adesope's choice |
 | 2026-11-15 | Hosting = **Vercel Hobby** (app + `/api/source`); Firebase Hosting not used | Not required by the hackathon; Functions need Blaze |
 | 2026-11-15 | App Check: try reCAPTCHA Enterprise; if blocked, use a debug token | Required by AI Logic; debug tokens accepted by the hackathon |
-| 2026-11-16 | App Check: add reCAPTCHA v3 (`VITE_RECAPTCHA_SITE_KEY`) | Live test: Adesope's own browser got `cloud_unavailable` because it had no debug token, so judges would too. v3 is free and needs no billing |
+| 2026-11-16 | App Check: Fraud Defense (reCAPTCHA Enterprise) via `VITE_APPCHECK_SITE_KEY` | Live test: Adesope's own browser got `cloud_unavailable` (no debug token), so judges would too. Firebase refused a classic v3 secret ('reCAPTCHA Classic has been deprecated'); Fraud Defense registered on Spark with no billing |
 | 2026-11-15 | Cloud model = newest free-tier Gemini Flash; Flash-Lite as backup (final pick at Gate 0) | Free tier |
 | 2026-11-15 | Hackathon quota request: skipped | Not needed without grounding |
 | 2026-11-15 | Local name finder → roadmap | Needs open web search |
@@ -705,6 +705,6 @@ After the internal cutoff: fixes only. After the deadline: demo stays live, no f
 
 | # | Question | Owner | Decide by |
 |---|---|---|---|
-| 2 | Can a reCAPTCHA Enterprise key be created without billing? If not → debug token | Adesope | Phase 0 |
+| 2 | Can a reCAPTCHA Enterprise key be created without billing? Yes: Fraud Defense registered 2026-11-16 | Adesope | Done |
 
 When answered, move the answer to §16.
