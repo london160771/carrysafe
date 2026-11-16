@@ -1,7 +1,7 @@
 import { getAI, getGenerativeModel, GoogleAIBackend, InferenceMode } from 'firebase/ai';
 import { getFirebaseApp } from '../firebase/app.js';
 
-export const CLOUD_MODEL = 'gemini-2.5-flash';
+export const CLOUD_MODEL = 'gemini-3.5-flash-lite';
 
 const IMAGE_INPUT = { expectedInputs: [{ type: 'image' }, { type: 'text' }] };
 

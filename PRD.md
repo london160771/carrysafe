@@ -372,7 +372,8 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 **Result:**
 - Step 0 PASSED (2026-11-14): Gemini Nano downloaded on the HP EliteBook x360 1030 G2 (performance class "Low", GPU path) and replied to a text prompt.
 - Step 3 PASSED from the dev container (2026-11-15): all 8 listed pages fetched (Vercel run pending).
-- Steps 1, 2, 4, 5, 6: pending → `docs/gate0.md`.
+- Steps 4 + 5 PASSED (2026-11-16): live verdicts with verified quotes for methylphenidate × AE, paracetamol × AE, pseudoephedrine × JP.
+- Steps 1, 2, 6: pending (demo laptop) → `docs/gate0.md`.
 
 **Resolved decisions (do not re-litigate):**
 
@@ -396,6 +397,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Official sources: JP = MHLW Narcotics Control Dept + UK FCDO Japan; AE = UAE Embassy (Washington) + UK FCDO UAE; SG = HSA; GR = UK FCDO Greece (no fetchable Greek government page with traveller rules); GB = GOV.UK; US = FDA (CBP blocks automated fetches, 403). `sources.json` URLs now carry their own authority | Fetch results in `docs/gate0.md` |
 | 2026-11-15 | INV-3 hardened: quotes ≥ 20 chars; curly quotes/dashes folded (models often straighten them); "needs documents" also needs a verified quote; cached verdicts re-verified | Phase 2 build; FCDO pages use curly apostrophes |
 | 2026-11-15 | Japan + pseudoephedrine: let the verified quote decide; keep both official pages (MHLW NCD + UK FCDO). The demo may show ⚠ needs documents instead of ⛔ | Adesope's choice on the decision card |
+| 2026-11-16 | Cloud model = `gemini-3.5-flash-lite` | `gemini-2.5-flash` returns 404 for new projects; `gemini-3.8-flash` gave no response in 170 s; flash-lite answered in 1.3 s (`docs/gate0.md`) |
 
 ---
 

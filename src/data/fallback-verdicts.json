@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "ingredient": "methylphenidate",
+    "country": "AE",
+    "verdict": "needs_documents",
+    "quote": "All Travelers carrying controlled medication into the UAE must apply for approval through the Ministry of Health (MoH) website.",
+    "conditions": "Apply for approval through the UAE Ministry of Health website before the trip and carry the prescription.",
+    "pageExcerpt": "All Travelers carrying controlled medication into the UAE must apply for approval through the Ministry of Health (MoH) website. This should be completed before making the trip.",
+    "sourceUrl": "https://www.uae-embassy.org/permitted-prescriptionsdrugs-while-entering-uae",
+    "authority": "Embassy of the United Arab Emirates, Washington DC",
+    "savedOn": "2026-11-16"
+  },
+  {
+    "ingredient": "paracetamol",
+    "country": "AE",
+    "verdict": "allowed",
+    "quote": "All other medication (prescription for uncontrolled medication and over-the-counter medication) does not need prior approval from MoH.",
+    "conditions": "No prior approval needed for uncontrolled or over-the-counter medicine.",
+    "pageExcerpt": "All other medication (prescription for uncontrolled medication and over-the-counter medication) does not need prior approval from MoH.",
+    "sourceUrl": "https://www.uae-embassy.org/permitted-prescriptionsdrugs-while-entering-uae",
+    "authority": "Embassy of the United Arab Emirates, Washington DC",
+    "savedOn": "2026-11-16"
+  },
+  {
+    "ingredient": "pseudoephedrine",
+    "country": "JP",
+    "verdict": "needs_documents",
+    "quote": "If your medicine is in “Narcotics” and/or “Stimulants' Raw Materials”, you need to get a permission before you enter/leave Japan.",
+    "conditions": "Get permission before entering Japan (Stimulants' Raw Materials).",
+    "pageExcerpt": "If your medicine is in “Narcotics” and/or “Stimulants' Raw Materials”, you need to get a permission before you enter/leave Japan.",
+    "sourceUrl": "https://www.ncd.mhlw.go.jp/en/application2.html",
+    "authority": "Ministry of Health, Labour and Welfare, Narcotics Control Department",
+    "savedOn": "2026-11-16"
+  }
+]

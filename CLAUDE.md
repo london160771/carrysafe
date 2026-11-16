@@ -101,6 +101,7 @@ Check installed versions first.
 - **AI Logic inference source:** `result.response.inferenceSource` (`"on_device"` / `"in_cloud"`). On-device images need `onDeviceParams.createOptions.expectedInputs: [{type:'image'}]`.
 - **Official pages that block bots:** cbp.gov (403), mohap.gov.ae (reset), Japanese embassy sites (403). See `docs/gate0.md`.
 - **Vitest 5:** a function returned from `beforeEach` runs as teardown. Write `beforeEach(() => { mock.mockReset(); })` with braces, or the mock gets called after the test.
+- **Cloud model (2026-11-16):** `gemini-2.5-flash` is closed to new projects (404); `gemini-3.8-flash` hung > 170 s; use `gemini-3.5-flash-lite` (`src/ai/models.js`).
 - [Add breaking changes here as you find them.]
 
 ## 9. Code quality

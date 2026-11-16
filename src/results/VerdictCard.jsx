@@ -17,12 +17,18 @@ export default function VerdictCard({ result }) {
           <span aria-hidden="true">{label.icon}</span> <span className={`text-${label.tone === 'secondary' ? 'body' : label.tone}`}>{label.word}</span>
           <span className="text-body-secondary"> · {result.ingredient}</span>
         </h4>
-        {result.conditions && <p className="mb-2">{result.conditions}</p>}
+        {result.conditions && result.quoteVerified && <p className="mb-2">{result.conditions}</p>}
         {result.reason && REASON_TEXT[result.reason] && <p className="mb-2">{REASON_TEXT[result.reason]}</p>}
         {result.quote && (
           <figure className="mb-2">
             <blockquote className="blockquote fs-6 border-start border-3 ps-2 mb-1">“{result.quote}”</blockquote>
-            {result.quoteVerified && <figcaption className="small text-success fw-semibold">Quote found on official page ✓</figcaption>}
+            {result.quoteVerified ? (
+              <figcaption className="small text-success fw-semibold">Quote found on official page ✓</figcaption>
+            ) : (
+              <figcaption className="small text-danger fw-semibold">
+                <span aria-hidden="true">✗</span> AI quote not found on the official page
+              </figcaption>
+            )}
           </figure>
         )}
         <p className="small mb-2">

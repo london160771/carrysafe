@@ -43,7 +43,7 @@ Hosting: Vercel (app + `/api/source`, which fetches only listed official pages).
 See PRD §13.
 
 ## Tested, not claimed
-As of 2026-11-15, `npm run verify` passes with 31 test files and 135 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator. Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
+As of 2026-11-15, `npm run verify` passes with 32 test files and 137 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator. Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
 
 Not yet verified live: on-device Nano reading, cloud verdicts and translation. These need the Firebase web config, an App Check debug token and desktop Chrome. See `docs/gate0.md`.
 

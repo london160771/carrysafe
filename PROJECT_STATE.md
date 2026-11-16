@@ -72,7 +72,8 @@
 - Japan pseudoephedrine: MHLW lists it as a "Stimulants' Raw Material" (permission in advance); UK FCDO says carrying it is illegal. PRD story assumes ⛔. Decision pending.
 - Greece has no fetchable Greek government page with traveller rules; UK FCDO Greece is used.
 - Paracetamol is not named on the JP pages, so a JP ✅ can't be quote-verified yet (INV-3 → ⚠).
-- Cloud model name `gemini-2.5-flash` is provisional until Gate 0 step 5.
+- Cloud model is `gemini-3.5-flash-lite` (Gate 0 step 5 passed 2026-11-16).
+- Firestore rules not deployed yet, so rule-cache and group writes fail on the real project.
 
 ## 9. Handoff notes
 
@@ -81,6 +82,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Firebase config added locally; Anonymous Auth, Firestore DB and App Check debug token set up by Adesope. Live seed run: 3 verified verdicts (AE methylphenidate needs documents, AE paracetamol allowed, JP pseudoephedrine needs documents); saved to fallback table. Model switched to gemini-3.5-flash-lite. Unverified conditions now hidden on the card.
 
 - **2026-11-15** — Phase 6 (partial): /judge seeded demo, README setup + limits, LICENSE. Report: `docs/phase-reports/phase-6-partial.md`.
 

@@ -8,8 +8,8 @@ Raw results only. PASS/FAIL is recorded when a step has actually been run. Pendi
 | 1 | Image → JSON on 3 real photos + 2 generated labels, with timings | PENDING | Adesope's laptop, `/gate0.html` button 1 |
 | 2 | Framing Coach hint on `broncholyte-front.jpg` (cut off on the right) | PENDING | Adesope's laptop, `/gate0.html` button 1 |
 | 3 | `/api/source` fetches official pages for all 6 countries | PASS from dev container (2026-11-15); Vercel run PENDING | Container done; Vercel needs the deploy |
-| 4 | Verdict + quote + `verifyQuote` for 3 seed checks | PENDING (needs Phase 2 code + Firebase config) | Browser |
-| 5 | Free-tier cloud model JSON under App Check (debug token) | PENDING (needs Firebase web config + debug token) | Browser, `/gate0.html` button 3 |
+| 4 | Verdict + quote + `verifyQuote` for 3 seed checks | PASS for the checks the pages support (2026-11-16, see below) | Headless Chromium, dev container |
+| 5 | Free-tier cloud model JSON under App Check (debug token) | PASS with `gemini-3.5-flash-lite` (2026-11-16) | Headless Chromium, dev container |
 | 6 | `speechSynthesis` ja-JP voice + `SpeechRecognition` in Chrome | PENDING | Adesope's laptop, `/gate0.html` button 4 |
 
 ## Step 3: official page fetch (2026-11-15, dev container, Node 22, real network)
@@ -62,3 +62,28 @@ Exact lines from the fetched text (2026-11-15):
 - Inference source: `result.response.inferenceSource` with values `"on_device"` / `"in_cloud"`.
 - On-device image input needs `onDeviceParams.createOptions.expectedInputs: [{type: 'image'}]`.
 - Cloud model name in `src/ai/models.js` is `gemini-2.5-flash` until step 5 confirms the newest free-tier Flash model.
+
+## Step 5: cloud model under App Check (2026-11-16, headless Chromium 153, debug token registered by Adesope)
+
+| Model | Result |
+|---|---|
+| `gemini-2.5-flash` | 404: "This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.8-flash" |
+| `gemini-3.8-flash` | Request sent, no response within 170 s (twice) |
+| `gemini-3.5-flash-lite` | 200 in 1322 ms, JSON `{"ok": true, "model": "gemini"}`, `inferenceSource: "in_cloud"` |
+
+Before the token was registered: 401 "Firebase App Check token is invalid" (enforcement is on).
+
+## Step 4: seed trip "Amaka-Tokyo" live (2026-11-16, `/judge`, 6 checks in 13.9 s, warm Vercel-less local `/api/source`)
+
+| Check | Shown | Quote verified | Quote (as returned by the model) |
+|---|---|---|---|
+| methylphenidate × AE | ⚠ Needs documents | yes | "All Travelers carrying controlled medication into the UAE must apply for approval through the Ministry of Health (MoH) website." |
+| pseudoephedrine × AE | ⚠ Not confirmed (page doesn't mention it; no cloud call) | — | — |
+| paracetamol × AE | ✅ Allowed | yes | "All other medication (prescription for uncontrolled medication and over-the-counter medication) does not need prior approval from MoH." |
+| methylphenidate × JP | ⚠ Not confirmed (`quote_not_found`) | no | Model wrote "psychotropicsequal" where the page text has a break; fail-closed as designed |
+| pseudoephedrine × JP | ⚠ Needs documents | yes | "If your medicine is in “Narcotics” and/or “Stimulants' Raw Materials”, you need to get a permission before you enter/leave Japan." |
+| paracetamol × JP | ⚠ Not confirmed (page doesn't mention it; no cloud call) | — | — |
+
+The 3 verified quotes are saved in `src/data/fallback-verdicts.json` (savedOn 2026-11-16) with the page line they came from.
+The paracetamol × AE ✅ rests on the model treating paracetamol as over-the-counter; the quote itself does not name paracetamol.
+Rule cache writes failed: Firestore rules not deployed yet (default production rules deny).
