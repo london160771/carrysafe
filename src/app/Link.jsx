@@ -2,8 +2,9 @@ import { navigate } from './navigation.js';
 
 const PRIMARY_BUTTON = 0;
 
-export default function Link({ to, children, ...rest }) {
+export default function Link({ to, children, onClick, ...rest }) {
   function follow(event) {
+    onClick?.(event);
     if (event.button !== PRIMARY_BUTTON || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     navigate(to);
