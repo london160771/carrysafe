@@ -1,4 +1,4 @@
-import { readAppCheckSiteKey, readFirebaseConfig } from '../firebase/config.js';
+import { readAppCheckProvider, readFirebaseConfig } from '../firebase/config.js';
 
 export function describeSetup(env, hasPromptApi) {
   let firebase;
@@ -10,7 +10,7 @@ export function describeSetup(env, hasPromptApi) {
   }
   return [
     firebase,
-    readAppCheckSiteKey(env)
+    readAppCheckProvider(env)
       ? { ok: true, label: 'Cloud check protected by reCAPTCHA' }
       : { ok: false, label: 'Cloud check in test mode: needs a registered debug token' },
     hasPromptApi

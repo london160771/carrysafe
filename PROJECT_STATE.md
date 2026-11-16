@@ -30,7 +30,7 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 35 files / 150 tests, build OK | 2026-11-16 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 35 files / 152 tests, build OK | 2026-11-16 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
 | UI at 390px | Playwright on all 6 pages + `/join/:id` + old `/#/panel` link | no horizontal scroll (scrollWidth 390); old hash link lands on `/privacy` | 2026-11-16 |
 | Phone card + offline | Playwright: laptop makes card (live cloud translation), QR decoded with jsQR back to the link, Pixel 7 imports it, server stopped, `/card`, `/`, `/privacy` still open | PASS (emulated phone, not a real device) | 2026-11-16 |
@@ -83,6 +83,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Live test by Adesope: Border card translation failed with `cloud_unavailable` because his browser had no App Check debug token. Added reCAPTCHA v3 support (`VITE_RECAPTCHA_SITE_KEY`, waits for Adesope's key) and a plain `cloud_not_allowed` error. Verify: 35 files / 152 tests, build OK.
 
 - **2026-11-16** — Phone batch: border card sent to a phone by QR (data in the link fragment, nothing uploaded), print / save as PDF, installable PWA with offline card, "What left this device" rename. Offline bug fixed: assets carry `Vary: Origin`, so the service worker matches with `ignoreVary`. Verify: lint clean, 35 files / 150 tests, build OK. Report: `docs/phase-reports/phone-batch.md`.
 

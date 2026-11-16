@@ -4,6 +4,8 @@ import { recordOutgoing } from '../privacy/outgoingLog.js';
 import { cloudModel } from './models.js';
 import { CLOUD_PROMPTS } from './prompts.js';
 
+const APP_CHECK_FAILURE = /app.?check/i;
+
 export async function sendCloudRequest(request, { schema, modelFactory = cloudModel }) {
   if (!isGuardedRequest(request)) {
     recordOutgoing({ channel: 'cloud-ai', payload: null, status: 'blocked', detail: 'field_not_allowed' });
@@ -18,7 +20,7 @@ export async function sendCloudRequest(request, { schema, modelFactory = cloudMo
     ({ response } = await model.generateContent(buildPrompt(request)));
   } catch (error) {
     if (error instanceof AppError) throw error;
-    throw new AppError('cloud_unavailable', error.message);
+    throw new AppError(APP_CHECK_FAILURE.test(error.message) ? 'cloud_not_allowed' : 'cloud_unavailable', error.message);
   }
   try {
     return { json: JSON.parse(response.text()), inferenceSource: response.inferenceSource ?? null };

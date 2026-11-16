@@ -4,7 +4,7 @@
 
 Carry Safe checks whether your medicine is legal at every stop on your trip, including layovers. Your laptop reads the label privately, and only the ingredient name goes out to be checked against official government pages, with the exact quote verified.
 
-[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](#) · Tests: 150 unit + 7 rules passing (2026-11-16)
+[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](#) · Tests: 152 unit + 7 rules passing (2026-11-16)
 
 > Built for #BuildHybridAI 2026 (Google Firebase) with Firebase AI Logic hybrid inference. 🚧 In progress: P0 live on Vercel; demo video and on-device recordings pending.
 
@@ -59,7 +59,10 @@ npm run dev:emulators        # app against local Auth + Firestore emulators
 ```
 On-device features need desktop Chrome 139+ with the Gemini Nano Prompt API. `/gate0.html` runs the Gate 0 checks.
 
-### App Check (debug token)
+### App Check
+The live site uses reCAPTCHA v3 when `VITE_RECAPTCHA_SITE_KEY` is set (free; the secret key goes in Firebase console → App Check → Apps). Without it, each browser needs a registered debug token, or cloud checks fail with `cloud_not_allowed`.
+
+**Debug token (local):**
 1. Run `npm run dev` and open the app in Chrome.
 2. Open DevTools → Console and copy the line `App Check debug token: …`.
 3. In the Firebase console, open App Check → Apps → ⋮ → Manage debug tokens, then add the token.

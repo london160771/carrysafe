@@ -234,7 +234,8 @@ The character is illustrative; the rules are real and must be confirmed against 
 | `source_unavailable` | Official page fetch failed | yes | Saved copy shown with its date, or ⚠ |
 | `quote_not_found` | Model quote not on the page | yes | Shown as ⚠ with the official link |
 | `country_not_covered` | Country not in the registry | no | Embassy link |
-| `cloud_unavailable` | AI Logic / network / App Check / free-tier limit | yes | Retry; cached verdict shown if present |
+| `cloud_unavailable` | AI Logic / network / free-tier limit | yes | "Try again in a minute"; cached verdict shown if present |
+| `cloud_not_allowed` | App Check rejected this browser (no reCAPTCHA key, no registered debug token) | no | Say so plainly; point to App Check in the README |
 | `not_trip_member` | Reading a trip you're not in | no | Ask for an invite |
 | `card_link_invalid` | A card link or QR code that is damaged or from another app | no | Make the card again and scan the new code |
 
@@ -244,7 +245,7 @@ The character is illustrative; the rules are real and must be confirmed against 
 
 - **Privacy:** INV-1, INV-2, INV-4, INV-7. Firebase web config is public by design; no other secrets in the client.
 - **Security:**
-  - App Check is required by AI Logic: reCAPTCHA Enterprise (Fraud Defense) if a key can be created without billing; otherwise a debug token, which the hackathon accepts.
+  - App Check is required by AI Logic: reCAPTCHA v3 (free, no billing) so any browser works; reCAPTCHA Enterprise is also supported; a debug token is the local fallback.
   - Firestore rules: members-only reads; members write only their own status.
   - `/api/source` is fetch-only, uses the allow-list, has a timeout and a size cap, and needs no secrets.
 - **Cost:** Firebase Spark + Gemini Developer API free tier + Vercel Hobby. No billing.
@@ -392,6 +393,7 @@ Remove the device brain and labels must be uploaded. Remove the cloud brain and 
 | 2026-11-15 | Countries covered = JP, AE, SG, GR, GB, US | Adesope's choice |
 | 2026-11-15 | Hosting = **Vercel Hobby** (app + `/api/source`); Firebase Hosting not used | Not required by the hackathon; Functions need Blaze |
 | 2026-11-15 | App Check: try reCAPTCHA Enterprise; if blocked, use a debug token | Required by AI Logic; debug tokens accepted by the hackathon |
+| 2026-11-16 | App Check: add reCAPTCHA v3 (`VITE_RECAPTCHA_SITE_KEY`) | Live test: Adesope's own browser got `cloud_unavailable` because it had no debug token, so judges would too. v3 is free and needs no billing |
 | 2026-11-15 | Cloud model = newest free-tier Gemini Flash; Flash-Lite as backup (final pick at Gate 0) | Free tier |
 | 2026-11-15 | Hackathon quota request: skipped | Not needed without grounding |
 | 2026-11-15 | Local name finder → roadmap | Needs open web search |

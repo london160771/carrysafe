@@ -13,6 +13,7 @@ export const REASON_TEXT = Object.freeze({
   not_mentioned: 'The official page does not mention this medicine.',
   source_unavailable: 'We could not open the official page right now.',
   cloud_unavailable: 'The check is not working right now. Try again.',
+  cloud_not_allowed: 'This browser is not allowed to use the cloud check yet.',
   config_missing: 'Checks are not set up on this copy of the app.',
   country_not_covered: 'We don’t cover this country yet. Ask its embassy.',
 });

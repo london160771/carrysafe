@@ -27,9 +27,15 @@ describe('sendCloudRequest', () => {
   });
 
   it('maps SDK failures to cloud_unavailable', async () => {
-    const factory = () => ({ generateContent: async () => Promise.reject(new Error('App Check failed')) });
+    const factory = () => ({ generateContent: async () => Promise.reject(new Error('fetch failed')) });
     const request = buildCloudRequest({ task: 'brand', brand: 'X' });
     await expect(sendCloudRequest(request, { modelFactory: factory })).rejects.toMatchObject({ code: 'cloud_unavailable', retryable: true });
+  });
+
+  it('maps App Check failures to cloud_not_allowed', async () => {
+    const factory = () => ({ generateContent: async () => Promise.reject(new Error('Firebase App Check token is invalid')) });
+    const request = buildCloudRequest({ task: 'brand', brand: 'X' });
+    await expect(sendCloudRequest(request, { modelFactory: factory })).rejects.toMatchObject({ code: 'cloud_not_allowed', retryable: false });
   });
 
   it('passes structured errors such as config_missing through unchanged', async () => {
