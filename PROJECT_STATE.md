@@ -30,7 +30,7 @@
 
 | Check | Command | Result | Date |
 |---|---|---|---|
-| Full gate | `npm run verify` | PASS: lint 0 warnings, 35 files / 151 tests, build OK | 2026-11-16 |
+| Full gate | `npm run verify` | PASS: lint 0 warnings, 36 files / 153 tests, build OK | 2026-11-16 |
 | Rules tests | `npm run test:rules` | PASS: 7 tests (Firestore emulator) | 2026-11-15 |
 | UI at 390px | Playwright on all 6 pages + `/join/:id` + old `/#/panel` link | no horizontal scroll (scrollWidth 390); old hash link lands on `/privacy` | 2026-11-16 |
 | Phone card + offline | Playwright: laptop makes card (live cloud translation), QR decoded with jsQR back to the link, Pixel 7 imports it, server stopped, `/card`, `/`, `/privacy` still open | PASS (emulated phone, not a real device) | 2026-11-16 |

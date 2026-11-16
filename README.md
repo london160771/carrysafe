@@ -4,7 +4,7 @@
 
 Carry Safe checks whether your medicine is legal at every stop on your trip, including layovers. Your laptop reads the label privately, and only the ingredient name goes out to be checked against official government pages, with the exact quote verified.
 
-[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](#) · Tests: 151 unit + 7 rules passing (2026-11-16)
+[Live demo](https://carrysafe-rho.vercel.app) · [Judge Mode](https://carrysafe-rho.vercel.app/judge) · [Demo video](#) · Tests: 153 unit + 7 rules passing (2026-11-16)
 
 > Built for #BuildHybridAI 2026 (Google Firebase) with Firebase AI Logic hybrid inference. 🚧 In progress: P0 live on Vercel; demo video and on-device recordings pending.
 
@@ -44,7 +44,7 @@ Hosting: Vercel (app + `/api/source`, which fetches only listed official pages).
 See PRD §13.
 
 ## Tested, not claimed
-As of 2026-11-16, `npm run verify` passes with 35 test files and 151 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator (last run 2026-11-15; rules unchanged since). Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
+As of 2026-11-16, `npm run verify` passes with 35 test files and 153 unit tests, and `npm run test:rules` passes 7 Firestore rules tests in the emulator (last run 2026-11-15; rules unchanged since). Each invariant in PRD §11 has its own tests, for example `src/privacy/buildCloudRequest.test.js` (INV-1/2), `src/core/verifyQuote.test.js` (INV-3), `tests/rules/` (INV-4), `src/meds/medicine.test.js` (INV-6) and `api/source.test.js` (INV-7).
 
 Verified live (2026-11-16): cloud verdicts with verified quotes, the shared rule cache, group trips and the lab. Not yet verified live: on-device Nano reading and the Japanese voice, which need the demo laptop. See `docs/gate0.md`.
 
