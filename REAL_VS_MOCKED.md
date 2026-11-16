@@ -2,11 +2,11 @@
 
 Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: cloud"**. These badges come from the SDK, not hard-coded labels. Every verdict shows the official quote, its link and its date.
 
-> Status (2026-11-15): Phase 0 built. `/api/source` real fetch works for all 8 listed pages from the dev container (`docs/gate0.md`). Other rows are planned. Update this file as each phase ships.
+> Status (2026-11-16): P0 live at https://carrysafe-rho.vercel.app. Every row below has been run for real.
 
 | Part | Real or mocked | Proof |
 |---|---|---|
-| On-device label reading + Framing Coach (Gemini Nano) | Real | [badge screenshot / video timestamp] |
+| On-device label reading + Framing Coach (Gemini Nano) | Real; run on the demo laptop 2026-11-16 (sample labels read exactly; real packs weaker; coach often says "Readable" wrongly) | `docs/gate0.md` steps 1–2; demo video 0:38–0:51 (the wait is sped up and labelled) |
 | Official page fetch (`/api/source`, 6 countries) | Real | `api/source.test.js`; fetch log in `docs/gate0.md` |
 | Cloud verdict + word-for-word quote check | Real; live seed run 2026-11-16 (`docs/gate0.md`) | `src/core/verifyQuote.test.js`, `src/check/checkStop.test.js` |
 | Request guard + lab | Real | `src/privacy/buildCloudRequest.test.js`, `src/lab/attempts.test.js`; lab 5/5 in the emulator run |
