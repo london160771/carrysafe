@@ -12,7 +12,7 @@
 - **Active phase:** P0 live on Vercel; UI redesign and phone batch (QR card to phone, print/PDF, install + offline card) done. Phase 5 (P1) waits until P0 is recorded (PRD §26).
 - **Status:** Scaffold, Firebase init, `/api/source` (real HTML fetch, allow-list, timeout, size cap), `sources.json` (6 countries, 8 pages), Gate 0 harness (`/gate0.html`), generated sample labels. `npm run verify` passes.
 - **Next step:** merge the phone batch to `main`; Adesope runs `/gate0.html` steps 1, 2, 6 on the demo laptop and tests install + QR on a real phone; App Check for judges' browsers; recordings.
-- **Blocked by:** demo laptop and a real phone (Adesope).
+- **Blocked by:** demo laptop (Adesope): Gate 0 steps 1, 2, 6 and recordings.
 
 ## 2. Phase tracker
 
@@ -83,6 +83,8 @@
 - **Watch out for:** App Check enforcement on AI Logic; device-model init needs a user gesture; no billing.
 
 ## 10. Build log
+
+- **2026-11-16** — Adesope tested on his real phone: QR import, install, airplane-mode card all work. Fresh browser with no debug token gets live cloud translation (Fraud Defense App Check).
 
 - **2026-11-16** — Live test by Adesope: Border card translation failed with `cloud_unavailable` because his browser had no App Check debug token. Firebase refused a classic reCAPTCHA v3 key; Adesope registered Fraud Defense (reCAPTCHA Enterprise) with no billing. App Check uses `VITE_APPCHECK_SITE_KEY`. Added a plain `cloud_not_allowed` error.
 

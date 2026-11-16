@@ -15,7 +15,7 @@ Every AI result shows where it ran: **"Ran on: this device"** or **"Ran on: clou
 | Seeded "Amaka-Tokyo" trip | Sample data, real checks | `DEMO TRIP` label |
 | Sample medicine photos in Judge Mode | Sample images | "Sample photo" caption |
 | Border card to phone (QR) | Real: the card is compressed into the link fragment, never uploaded | `src/card/cardTransfer.test.js` |
-| Install + offline card (PWA) | Real service worker; offline open checked in an emulated phone (Playwright, server stopped); not yet on a real phone | `src/pwa/precache.test.js`; `docs/phase-reports/phone-batch.md` |
+| Install + offline card (PWA) | Real service worker; offline open checked in an emulated phone (Playwright) and on Adesope's real phone (install, QR scan, airplane mode) 2026-11-16 | `src/pwa/precache.test.js`; `docs/phase-reports/phone-batch.md` |
 | Travel and family photos on the pages | Stock photos from Pexels (free licence), illustrations only, not real users | Footer: "Photos from Pexels, used as illustrations"; list in `public/photos/CREDITS.md` |
 
 **Not used:** Google Search grounding (paid-only; billing unavailable). See ROADMAP.
